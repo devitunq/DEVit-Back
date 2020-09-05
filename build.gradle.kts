@@ -23,6 +23,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation(group = "io.springfox", name = "springfox-swagger-ui", version =  "2.9.2")
+	implementation(group = "io.springfox", name = "springfox-swagger2", version =  "2.9.2")
 	implementation("org.mongodb:mongodb-driver-sync:4.0.1")
 	implementation("org.mongodb:mongodb-driver-core:4.0.1")
 	implementation("org.mongodb:bson:4.0.1")
