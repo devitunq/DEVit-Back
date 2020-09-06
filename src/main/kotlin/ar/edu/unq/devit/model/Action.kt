@@ -1,8 +1,11 @@
 package ar.edu.unq.devit.model
 
+//Eh... No estoy seguro...
 enum class Action {
-    GoUp,
-    GoDown,
-    GoLeft,
-    GoRight
+    GoUp { override fun invoke(position: Position): Position = position.up()},
+    GoDown { override fun invoke(position: Position): Position = position.down()},
+    GoLeft { override fun invoke(position: Position): Position = position.left()},
+    GoRight { override fun invoke(position: Position): Position = position.right()};
+
+    abstract operator fun invoke(position: Position): Position
 }

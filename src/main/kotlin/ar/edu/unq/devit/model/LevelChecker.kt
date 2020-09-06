@@ -7,75 +7,31 @@ class LevelChecker(var levelToCheck: Level, var actionList: MutableList<Action>)
 
     var levelToCheckState = LevelState.Incomplete
 
-    // REFACTOR ..
+    private fun tryActionOrException(action: Action){
+        //Básicamente estamos llamando al "invoke" con la posición desde la cuál queremos subir, evita el when.. Volver a mirarlo por las dudas mañana.
+        val newPlayerPos = action(actualPositionPlayer)
+//        var newPlayerPos: Position = when(action){
+//            Action.GoUp -> actualPositionPlayer.up()
+//            Action.GoDown -> actualPositionPlayer.down()
+//            Action.GoLeft -> actualPositionPlayer.left()
+//            Action.GoRight -> actualPositionPlayer.right()
+//        }
 
-    fun tryGoUp(){
-        var newPlayerPos = actualPositionPlayer
-        newPlayerPos.posY++;
-
-        if(levelToCheck.tilesPositions().contains(newPlayerPos)){
-            actualPositionPlayer = newPlayerPos
-        }else{
+        if(levelToCheck.tilesPositions().contains(newPlayerPos))
+            actualPositionPlayer = newPlayerPos!!
+        else
             throw Exception("No hay camino por aquí")
-        }
-    }
-    fun tryGoDown(){
-        var newPlayerPos = actualPositionPlayer
-        newPlayerPos.posY--;
-
-        if(levelToCheck.tilesPositions().contains(newPlayerPos)){
-            actualPositionPlayer = newPlayerPos
-        }else{
-            throw Exception("No hay camino por aquí")
-        }
     }
 
-    fun tryGoLeft(){
-        var newPlayerPos = actualPositionPlayer
-        newPlayerPos.posX--;
-
-        if(levelToCheck.tilesPositions().contains(newPlayerPos)){
-            actualPositionPlayer = newPlayerPos
-        }else{
-            throw Exception("No hay camino por aquí")
-        }
-    }
-
-    fun tryGoRight(){
-        var newPlayerPos = actualPositionPlayer
-        newPlayerPos.posX++;
-
-        if(levelToCheck.tilesPositions().contains(newPlayerPos)){
-            actualPositionPlayer = newPlayerPos
-        }else{
-            throw Exception("No hay camino por aquí")
-        }
-    }
-
-
-
-    fun tryActionOrException(action: Action){
-        when(action){
-            Action.GoUp -> tryGoUp()
-            Action.GoDown -> tryGoDown()
-            Action.GoLeft -> tryGoLeft()
-            Action.GoRight -> tryGoRight ()
-        }
-    }
-
-    fun doActions(){
-        for (action in actionList){
+    private fun doActions(){
+        for (action in actionList)
             tryActionOrException(action)
-        }
     }
 
     fun winOrLost(){
         doActions()
-        if(actualPositionPlayer.posX == levelToCheck.finishPosition().posX
-                && actualPositionPlayer.posY == levelToCheck.finishPosition().posY ){
-
+        if(actualPositionPlayer == levelToCheck.finishPosition())
             levelToCheckState = LevelState.Complete
-        }
     }
 
 }

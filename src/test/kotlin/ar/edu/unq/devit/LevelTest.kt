@@ -1,6 +1,6 @@
 package ar.edu.unq.devit
 
-import ar.edu.unq.devit.dataTesting.EasyLevel
+import ar.edu.unq.devit.HelpersAndData.EasyLevel
 import ar.edu.unq.devit.model.*
 import org.junit.Assert
 import org.junit.jupiter.api.BeforeEach
@@ -26,7 +26,7 @@ class LevelTest{
     }
 
     @Test
-    fun getFinshPosition(){
+    fun getFinishPosition(){
         var finishPos = data.levelTest.finishPosition()
 
         val realFinishPos = Position(4,4)
@@ -35,7 +35,7 @@ class LevelTest{
     }
 
     @Test
-    fun getTileshPositions(){
+    fun getTilesPositions(){
         var tilesPos = data.levelTest.tilesPositions()
 
         val realtilesPos = listOf(
