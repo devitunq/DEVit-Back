@@ -1,3 +1,8 @@
 package ar.edu.unq.devit.model
 
-data class Key(override var position: Position?) : LevelElement
+import org.bson.codecs.pojo.annotations.BsonDiscriminator
+
+@BsonDiscriminator(value = "Key", key = "type")
+class Key : LevelElement {
+    override var position: Position? = null
+}

@@ -1,9 +1,37 @@
 package ar.edu.unq.devit.model
 
-//Revisar los copy, funcionan pero algo no me cierra.
-data class Position(var posX: Int, var posY: Int) {
-    fun up(): Position = copy(posY = posY+1)
-    fun down(): Position = copy(posY = posY-1)
-    fun left(): Position = copy(posX = posX-1)
-    fun right(): Position = copy(posX = posX+1)
+class Position {
+    constructor()
+    constructor(x: Int, y: Int) {
+        posX = x
+        posY = y
+    }
+    var posX: Int = 0
+    var posY: Int = 0
+
+    fun up(): Position = Position(posX,  posY+1)
+    fun down(): Position = Position(posX,  posY-1)
+    fun left(): Position = Position(posX-1, posY)
+    fun right(): Position = Position(posX+1, posY)
+
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Position
+
+        if (posX != other.posX) return false
+        if (posY != other.posY) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = posX
+        result = 31 * result + posY
+        return result
+    }
+
+
 }

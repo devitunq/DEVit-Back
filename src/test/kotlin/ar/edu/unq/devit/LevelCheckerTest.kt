@@ -29,9 +29,7 @@ class LevelCheckerTest{
 
         var levelChecker = LevelChecker(data.levelTest,succesActionList)
 
-        levelChecker.winOrLost()
-
-        Assert.assertTrue(levelChecker.levelToCheckState == LevelState.Complete)
+        Assert.assertTrue(levelChecker.winOrLost() == LevelState.Complete)
     }
 
     @Test
@@ -41,9 +39,7 @@ class LevelCheckerTest{
 
         var levelChecker = LevelChecker(data.levelTest,succesActionList)
 
-        levelChecker.winOrLost()
-
-        Assert.assertTrue(levelChecker.levelToCheckState == LevelState.Complete)
+        Assert.assertTrue(levelChecker.winOrLost() == LevelState.Complete)
     }
 
     @Test
@@ -54,9 +50,7 @@ class LevelCheckerTest{
 
         var levelChecker = LevelChecker(data.levelTest,succesActionList)
 
-        levelChecker.winOrLost()
-
-        Assert.assertTrue(levelChecker.levelToCheckState == LevelState.Complete)
+        Assert.assertTrue(levelChecker.winOrLost() == LevelState.Complete)
 
     }
 
@@ -82,9 +76,7 @@ class LevelCheckerTest{
 
         var levelChecker = LevelChecker(data.levelTest,succesActionList)
 
-        levelChecker.winOrLost()
-
-        Assert.assertTrue(levelChecker.levelToCheckState == LevelState.Incomplete)
+        Assert.assertTrue(levelChecker.winOrLost() == LevelState.Incomplete)
     }
 
 
