@@ -52,6 +52,8 @@ class MongoTransaction: Transaction{
         )
 
         val uri = System.getenv().getOrDefault("MONGO_URI","mongodb+srv://devitmongo:devitmongo@cluster0.mvdfz.mongodb.net/devit_mongo?retryWrites=true&w=majority")
+//        val uri = System.getenv().getOrDefault("MONGO_URI","mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false")
+
         val connectionString = ConnectionString(uri)
         val settings = MongoClientSettings.builder()
                 .codecRegistry(codecRegistry)

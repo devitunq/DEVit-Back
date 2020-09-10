@@ -1,4 +1,4 @@
-package ar.edu.unq.devit.LevelServiceTest
+package ar.edu.unq.devit.levelServiceTest
 
 import ar.edu.unq.devit.dao.LevelMongoData
 import ar.edu.unq.devit.service.LevelService
@@ -25,9 +25,9 @@ class LevelServiceTest {
     @Test
     fun findByLevelTesting(){
 
-        var nameLevel = "Level One"
+        var nameLevel = "Easy_Level One"
 
-        var level1 = levelService.findByLevel(nameLevel)
+        var level1 = levelService.findByLevelId(nameLevel)
 
         Assert.assertEquals(data.easy.name , level1.difficulty!!.name)
         Assert.assertEquals(data.level1Elements.size, level1.elements.size)

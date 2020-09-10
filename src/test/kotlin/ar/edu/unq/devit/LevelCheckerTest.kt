@@ -1,6 +1,6 @@
 package ar.edu.unq.devit
 
-import ar.edu.unq.devit.HelpersAndData.EasyLevel
+import ar.edu.unq.devit.helpersAndData.EasyLevel
 import ar.edu.unq.devit.model.Action
 import ar.edu.unq.devit.model.LevelChecker
 import ar.edu.unq.devit.model.LevelState

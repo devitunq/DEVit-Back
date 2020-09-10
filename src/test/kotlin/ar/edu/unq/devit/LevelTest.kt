@@ -1,6 +1,6 @@
 package ar.edu.unq.devit
 
-import ar.edu.unq.devit.HelpersAndData.EasyLevel
+import ar.edu.unq.devit.helpersAndData.EasyLevel
 import ar.edu.unq.devit.model.*
 import org.junit.Assert
 import org.junit.jupiter.api.BeforeEach

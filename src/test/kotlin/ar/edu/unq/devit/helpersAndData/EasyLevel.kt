@@ -1,4 +1,4 @@
-package ar.edu.unq.devit.HelpersAndData
+package ar.edu.unq.devit.helpersAndData
 
 import ar.edu.unq.devit.model.*
 

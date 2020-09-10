@@ -1,6 +1,5 @@
 package ar.edu.unq.devit.model
 
-
 class LevelChecker(var levelToCheck: Level?, var actionList: MutableList<Action>) {
 
     var actualPositionPlayer = levelToCheck!!.playerPosition()

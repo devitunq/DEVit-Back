@@ -27,20 +27,18 @@ class LevelController {
         return ResponseEntity(response, HttpStatus.OK)
     }
 
-    @GetMapping
+    @GetMapping("/{levelId}")
     @Throws(Exception::class)
-    fun getLevelByName(@RequestParam name: String): ResponseEntity<Level> {
+    fun getLevelByName(@PathVariable levelId: String): ResponseEntity<Level> {
         var response: Level
         try {
-            response = service.findByLevel(name)
+            response = service.findByLevelId(levelId)
         } catch (e: Exception) {
             println("Error: $e")
             return ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         }
         return ResponseEntity(response, HttpStatus.OK)
     }
-
-
 
     @PostMapping("/solve")
     @Throws(Exception::class)
