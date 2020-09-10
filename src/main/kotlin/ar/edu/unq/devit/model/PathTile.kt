@@ -6,6 +6,8 @@ import org.bson.codecs.pojo.annotations.BsonDiscriminator
 class PathTile : LevelElement {
     override var position: Position? = null
 
+    constructor()
+
     constructor(position: Position){
         this.position = position
     }

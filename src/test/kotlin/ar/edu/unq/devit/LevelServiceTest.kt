@@ -1,4 +1,4 @@
-package ar.edu.unq.devit.levelServiceTest
+package ar.edu.unq.devit
 
 import ar.edu.unq.devit.dao.LevelMongoData
 import ar.edu.unq.devit.service.LevelService
