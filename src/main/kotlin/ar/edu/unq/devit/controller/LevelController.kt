@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/levels")
 class LevelController {
 
@@ -29,7 +30,7 @@ class LevelController {
 
     @GetMapping("/{levelId}")
     @Throws(Exception::class)
-    fun getLevelByName(@PathVariable levelId: String): ResponseEntity<Level> {
+    fun getLevelByLevelId(@PathVariable levelId: String): ResponseEntity<Level> {
         var response: Level
         try {
             response = service.findByLevelId(levelId)
