@@ -1,6 +1,5 @@
-package ar.edu.unq.devit.DAOtesting
+package ar.edu.unq.devit.LevelServiceTest
 
-import ar.edu.unq.devit.dao.LevelMongoDAO
 import ar.edu.unq.devit.dao.LevelMongoData
 import ar.edu.unq.devit.service.LevelService
 import org.junit.Assert
@@ -8,7 +7,7 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class LevelMongoDAOTest {
+class LevelServiceTest {
 
     var data = LevelMongoData()
     var levelService = LevelService()
@@ -20,7 +19,7 @@ class LevelMongoDAOTest {
 
     @AfterEach
     fun cleanData(){
-        data.deleteDefaultLevels()
+        //data.deleteDefaultLevels()
     }
 
     @Test
