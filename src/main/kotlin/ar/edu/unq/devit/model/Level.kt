@@ -1,18 +1,32 @@
 package ar.edu.unq.devit.model
 
+import org.bson.codecs.pojo.annotations.BsonDiscriminator
 import org.bson.codecs.pojo.annotations.BsonProperty
 
+@BsonDiscriminator
 class Level {
 
     @BsonProperty(value = "id")
     val id: String? = null
-
+    @BsonProperty
     var difficulty: Difficulty? = null
+    @BsonProperty
     var name : String? = null
-    var elements: MutableList<LevelElement> = mutableListOf() //Pensar si no separar los "tiles" de los elementos, estaría bien supongo. de momento es una lista de objetos ([Player, Key, Finish, Door, PathTile, PathTile, PathTile, PathTile, PathTile]))
+    @BsonProperty
+    var elements: MutableList<LevelElement> = mutableListOf()
+    @BsonProperty
     var description: String? = null
 
     constructor()
+
+    constructor(difficulty: Difficulty,name: String, elements: MutableList<LevelElement>, description: String){
+        this.difficulty = difficulty
+        this.name = name
+        this.elements = elements
+        this.description = description
+    }
+
+
 
     fun playerPosition(): Position =  elements.find { e -> e is Player }?.position!!
 

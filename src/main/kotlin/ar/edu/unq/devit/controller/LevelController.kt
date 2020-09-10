@@ -27,6 +27,8 @@ class LevelController {
         return ResponseEntity(response, HttpStatus.OK)
     }
 
+
+
     @PostMapping("/solve")
     @Throws(Exception::class)
     fun solve(@RequestBody solution: SolutionLevel): ResponseEntity<LevelState> {

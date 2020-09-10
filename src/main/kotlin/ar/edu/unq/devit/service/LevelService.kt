@@ -11,4 +11,7 @@ class LevelService {
     private val levelDAO = LevelMongoDAO()
 
     fun findByDifficulty(difficulty: Difficulty) : List<Level> = levelDAO.findEq("difficulty", difficulty.toString())
+
+    fun findByLevel(levelName: String) : Level = levelDAO.findEq("name", levelName).first()
+
 }

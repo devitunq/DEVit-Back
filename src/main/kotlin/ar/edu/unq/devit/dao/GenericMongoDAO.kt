@@ -72,4 +72,18 @@ open class GenericMongoDAO<T>(entityType: Class<T>) {
         return collection.aggregate(pipeline, resultClass).into(ArrayList())
     }
 
+    fun startTransaction(){
+        connection.start()
+    }
+
+    fun commit(){
+        connection.commit()
+    }
+
+    fun rollack(){
+        connection.rollback()
+    }
+
+
+
 }

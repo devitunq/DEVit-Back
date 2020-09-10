@@ -46,16 +46,12 @@ class MongoTransaction: Transaction{
     }
 
     init {
-//        val codecRegistry: CodecRegistry = CodecRegistries.fromRegistries(
-//                MongoClientSettings.getDefaultCodecRegistry(),
-//                CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build())
-//        )
         val codecRegistry: CodecRegistry = CodecRegistries.fromRegistries(
                 MongoClientSettings.getDefaultCodecRegistry(),
                 CodecRegistries.fromProviders(PojoCodecProvider.builder().register("ar.edu.unq.devit.model").build())
         )
 
-        val uri = System.getenv().getOrDefault("MONGO_URI","mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false")
+        val uri = System.getenv().getOrDefault("MONGO_URI","mongodb+srv://devitmongo:devitmongo@cluster0.mvdfz.mongodb.net/devit_mongo?retryWrites=true&w=majority")
         val connectionString = ConnectionString(uri)
         val settings = MongoClientSettings.builder()
                 .codecRegistry(codecRegistry)
