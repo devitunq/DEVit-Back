@@ -29,7 +29,7 @@ class LevelServiceTest {
 
         var level1 = levelService.findByLevelId(nameLevel)
 
-        Assert.assertEquals(data.easy.name , level1.difficulty!!.name)
+        Assert.assertEquals(data.easy , level1.difficulty)
         Assert.assertEquals(data.level1Elements.size, level1.elements.size)
 
     }

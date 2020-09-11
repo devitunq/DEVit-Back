@@ -25,39 +25,39 @@ class LevelCheckerTest{
     @Test
     fun firstPosibleTravel(){
         var succesActionList =
-                listOf(Action.GoUp,Action.GoUp,Action.GoRight,Action.GoUp,Action.GoRight,Action.GoRight).toMutableList()
+                listOf(Action.GoDown,Action.GoDown,Action.GoRight,Action.GoDown,Action.GoRight,Action.GoRight).toMutableList()
 
         var levelChecker = LevelChecker(data.levelTest,succesActionList)
 
-        Assert.assertTrue(levelChecker.winOrLost() == LevelState.Complete)
+        Assert.assertTrue(levelChecker.winOrLost().levelState == LevelState.Complete)
     }
 
     @Test
     fun secondPosibleTravel(){
         var succesActionList =
-                listOf(Action.GoRight,Action.GoRight,Action.GoUp,Action.GoRight,Action.GoUp,Action.GoUp).toMutableList()
+                listOf(Action.GoRight,Action.GoRight,Action.GoDown,Action.GoRight,Action.GoDown,Action.GoDown).toMutableList()
 
         var levelChecker = LevelChecker(data.levelTest,succesActionList)
 
-        Assert.assertTrue(levelChecker.winOrLost() == LevelState.Complete)
+        Assert.assertTrue(levelChecker.winOrLost().levelState == LevelState.Complete)
     }
 
     @Test
     fun thirdPosibleTravel(){
         var succesActionList =
-                listOf(Action.GoLeft,Action.GoUp,Action.GoRight,Action.GoUp,Action.GoRight,Action.GoUp,
+                listOf(Action.GoLeft,Action.GoDown,Action.GoRight,Action.GoDown,Action.GoRight,Action.GoDown,
                         Action.GoRight,Action.GoRight).toMutableList()
 
         var levelChecker = LevelChecker(data.levelTest,succesActionList)
 
-        Assert.assertTrue(levelChecker.winOrLost() == LevelState.Complete)
+        Assert.assertTrue(levelChecker.winOrLost().levelState == LevelState.Complete)
 
     }
 
     @Test
     fun notPosibleTravel(){
         var succesActionList =
-                listOf(Action.GoLeft,Action.GoUp,Action.GoUp).toMutableList()
+                listOf(Action.GoLeft,Action.GoDown,Action.GoDown).toMutableList()
 
         var levelChecker = LevelChecker(data.levelTest,succesActionList)
 
@@ -72,11 +72,11 @@ class LevelCheckerTest{
     @Test
     fun incompletePosibleTravel(){
         var succesActionList =
-                listOf(Action.GoUp,Action.GoUp,Action.GoRight,Action.GoUp,Action.GoRight).toMutableList()
+                listOf(Action.GoDown,Action.GoDown,Action.GoRight,Action.GoDown,Action.GoRight).toMutableList()
 
         var levelChecker = LevelChecker(data.levelTest,succesActionList)
 
-        Assert.assertTrue(levelChecker.winOrLost() == LevelState.Incomplete)
+        Assert.assertTrue(levelChecker.winOrLost().levelState == LevelState.Incomplete)
     }
 
 
