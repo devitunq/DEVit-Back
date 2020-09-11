@@ -9,8 +9,8 @@ class Position {
     var posX: Int = 0
     var posY: Int = 0
 
-    fun up(): Position = Position(posX,  posY+1)
-    fun down(): Position = Position(posX,  posY-1)
+    fun up(): Position = Position(posX,  posY-1)
+    fun down(): Position = Position(posX,  posY+1)
     fun left(): Position = Position(posX-1, posY)
     fun right(): Position = Position(posX+1, posY)
 

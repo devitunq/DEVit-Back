@@ -7,11 +7,8 @@ class LevelChecker(var levelToCheck: Level?, var actionList: MutableList<Action>
     var levelToCheckState = LevelState.Incomplete
 
     private fun tryActionOrException(action: Action){
-        val newPlayerPos = action(actualPositionPlayer)
-
-        if(levelToCheck!!.tilesPositions().contains(newPlayerPos))
-            actualPositionPlayer = newPlayerPos
-        else
+        actualPositionPlayer = action(actualPositionPlayer)
+        if(!levelToCheck!!.tilesPositions().contains(actualPositionPlayer))
             throw Exception("No hay camino por aquí")
     }
 
@@ -20,11 +17,11 @@ class LevelChecker(var levelToCheck: Level?, var actionList: MutableList<Action>
             tryActionOrException(action)
     }
 
-    fun winOrLost(): LevelState {
+    fun winOrLost(): SolutionResponse {
         doActions()
         if(actualPositionPlayer == levelToCheck!!.finishPosition())
             levelToCheckState = LevelState.Complete
-        return levelToCheckState
+        return SolutionResponse(levelToCheckState, actualPositionPlayer)
     }
 
 }

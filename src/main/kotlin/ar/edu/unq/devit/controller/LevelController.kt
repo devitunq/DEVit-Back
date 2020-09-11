@@ -41,12 +41,13 @@ class LevelController {
         return ResponseEntity(response, HttpStatus.OK)
     }
 
-    @PostMapping("/solve")
+    @PostMapping("/solve/{levelId}")
     @Throws(Exception::class)
-    fun solve(@RequestBody solution: SolutionLevel): ResponseEntity<LevelState> {
-        var levelChecker = LevelChecker(solution.level, solution.actions.toMutableList())
-        var res = LevelState.Incomplete
+    fun solve(@PathVariable levelId: String, @RequestBody solution: List<Action>): ResponseEntity<SolutionResponse> {
+        var res = SolutionResponse(LevelState.Incomplete)
         try {
+            var level = service.findByLevelId(levelId)
+            var levelChecker = LevelChecker(level, solution.toMutableList())
             res = levelChecker.winOrLost()
         } catch (e: Exception) {
             return ResponseEntity(res, HttpStatus.OK)
