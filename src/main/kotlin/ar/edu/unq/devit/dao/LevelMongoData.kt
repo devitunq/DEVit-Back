@@ -19,7 +19,7 @@ class LevelMongoData {
     var goRight = Action.GoRight
 
     // Positions
-    var posFinishLvl1 = Position(0,6)
+    var posFinishLvl1 = Position(6,0)
     var posPlayerLvl1 = Position(1,4)
 
     // Level name
@@ -38,6 +38,7 @@ class LevelMongoData {
     // Paths element
     var tile13 = PathTile(Position(1,3))
     var tile12 = PathTile(Position(1,2))
+    var tile14 = PathTile(Position(1,4))
     var tile22 = PathTile(Position(2,2))
     var tile32 = PathTile(Position(3,2))
     var tile42 = PathTile(Position(4,2))
@@ -47,14 +48,11 @@ class LevelMongoData {
     var tile60 = PathTile(Position(6,0))
 
 
-    // Path list
-
-    var pathList = listOf(tile12,tile13,tile22,tile32,tile41,tile42,tile51, tile60,tile61)
 
     // Elements list
     var level1Elements =
             listOf(
-                    finish,player,tile12,tile13,tile22,tile32,tile41,tile42,tile51,tile60,tile61
+                    finish,player,tile12,tile13,tile14,tile22,tile32,tile41,tile42,tile51,tile60,tile61
             ).toMutableList()
 
     // Level
