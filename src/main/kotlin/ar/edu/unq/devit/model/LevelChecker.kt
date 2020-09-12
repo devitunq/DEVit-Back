@@ -10,13 +10,11 @@ class LevelChecker(var levelToCheck: Level, var actionList: MutableList<Action>)
 
     private fun tryActionOrException(action: Action){
         actualPositionPlayer = action(actualPositionPlayer)
-        if(!levelToCheck.tilesPositions().contains(actualPositionPlayer)) {
+        levelToCheck.changePlayerPositionTo(actualPositionPlayer)
+        if(!levelToCheck.tilesPositions().contains(actualPositionPlayer))
             throw Exception("No hay camino por aquí")
-        }
-        else {
-            levelToCheck.changePlayerPositionTo(actualPositionPlayer)
+        else
             fullGame.add(levelToCheck.elements.toList())
-        }
     }
 
     private fun doActions(){
@@ -31,9 +29,9 @@ class LevelChecker(var levelToCheck: Level, var actionList: MutableList<Action>)
                 levelToCheckState = LevelState.Complete
                 levelToCheck.removeFinish()
                 fullGame.removeAt(fullGame.size-1)
-                fullGame.add(levelToCheck.elements.toList())
             }
         } catch(e: Exception){}
+        fullGame.add(levelToCheck.elements.toList())
         return SolutionResponse(levelToCheckState, fullGame)
     }
 
