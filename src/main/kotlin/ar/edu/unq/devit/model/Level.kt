@@ -34,4 +34,12 @@ class Level {
 
     fun finishPosition(): Position = elements.find { e -> e is Finish }?.position!!
 
+    fun changePlayerPositionTo(pos: Position) {
+        elements.removeIf { e -> e is Player }
+        elements.add(Player(pos))
+    }
+
+    fun removeFinish() {
+        elements.removeIf { e -> e is Finish }
+    }
 }
