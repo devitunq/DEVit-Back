@@ -20,6 +20,8 @@ class LevelChecker(var levelToCheck: Level, var actionList: MutableList<Action>)
     private fun doActions(){
         for (action in actionList)
             tryActionOrException(action)
+
+
     }
 
     fun winOrLost(): SolutionResponse {
