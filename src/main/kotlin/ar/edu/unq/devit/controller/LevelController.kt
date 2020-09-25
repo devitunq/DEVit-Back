@@ -28,6 +28,18 @@ class LevelController {
         return ResponseEntity(response, HttpStatus.OK)
     }
 
+    @GetMapping("/difficulties")
+    @Throws(Exception::class)
+    fun getDifficulties(): ResponseEntity<List<Difficulty>>{
+        var response: List<Difficulty>
+        try{
+            response = service.getDificulties()
+        }catch (e: Exception){
+            return ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+        return ResponseEntity(response, HttpStatus.OK)
+    }
+
     @GetMapping("/{levelId}")
     @Throws(Exception::class)
     fun getLevelByLevelId(@PathVariable levelId: String): ResponseEntity<Level> {

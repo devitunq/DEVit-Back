@@ -40,7 +40,6 @@ open class GenericMongoDAO<T>(entityType: Class<T>) {
         }else{
             collection.insertMany(objects)
         }
-
     }
 
     operator fun get(id: String?): T? {
@@ -56,6 +55,13 @@ open class GenericMongoDAO<T>(entityType: Class<T>) {
 
     fun <E> findEq(field:String, value:E ): List<T> {
         return find(eq(field, value))
+    }
+
+    fun findAll(): List<T> {
+        if(connection.session != null) {
+            return collection.find(connection.session!!).into(mutableListOf())
+        }
+        return collection.find().into(mutableListOf())
     }
 
     fun find(filter: Bson): List<T> {
