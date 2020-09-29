@@ -59,7 +59,7 @@ class LevelController {
         var res: SolutionResponse? = null
         try {
             var level = service.findByLevelId(levelId)
-            SolutionResponse(LevelState.Incomplete)
+            SolutionResponse(LevelState.Incomplete,"caca")
             var levelChecker = LevelChecker(level, solution.toMutableList())
             res = levelChecker.winOrLost()
         } catch (e: Exception) {

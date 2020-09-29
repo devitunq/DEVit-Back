@@ -56,11 +56,11 @@ class LevelMongoData {
             ).toMutableList()
 
     // Level
-    var levelOne = Level(easy,level1name,level1Elements,level1Desc)
+    var levelOne = Level(easy,level1name,level1Elements,level1Desc,9)
 
     fun createDefaultLevels(){
         mongoDAO.startTransaction()
-        mongoDAO.save(levelOne)
+        mongoDAO.safeSave(levelOne)
         mongoDAO.commit()
     }
 

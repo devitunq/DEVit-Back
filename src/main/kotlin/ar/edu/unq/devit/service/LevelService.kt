@@ -16,4 +16,5 @@ class LevelService {
 
     fun getDificulties() : List<Difficulty> = levelDAO.findAll().map { level -> level.difficulty!! }.toSet().toList()
 
+
 }

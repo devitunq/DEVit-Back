@@ -15,8 +15,6 @@ class LevelCheckerTest{
     var data = EasyLevel()
 
 
-
-
     @BeforeEach
     fun initializerLvlTesting(){
         data.dataInitialize()

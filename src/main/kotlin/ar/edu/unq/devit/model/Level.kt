@@ -16,15 +16,19 @@ class Level {
     var elements: MutableList<LevelElement> = mutableListOf()
     @BsonProperty
     var description: String? = null
+    @BsonProperty
+    var bestNumberMovesToWin: Int? = null
 
     constructor()
 
-    constructor(difficulty: Difficulty,name: String, elements: MutableList<LevelElement>, description: String){
+    constructor(difficulty: Difficulty,name: String, elements: MutableList<LevelElement>,
+                description: String, bestNumberMovesToWin: Int){
         this.levelId = "${difficulty}_${name}"
         this.difficulty = difficulty
         this.name = name
         this.elements = elements
         this.description = description
+        this.bestNumberMovesToWin = bestNumberMovesToWin
     }
 
 
