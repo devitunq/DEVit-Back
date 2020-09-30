@@ -45,13 +45,14 @@ class EasyLevelTwo {
     var tile10 = PathTile(Position(1,0))
     var tile20 = PathTile(Position(2,0))
     var tile30 = PathTile(Position(3,0))
+    var tile60 = PathTile(Position(6,0))
 
     // Elements list
     var level2Elements =
             listOf(
                     finish,player,tile16,tile26,tile36,tile46,tile15,tile45,tile55,tile65,tile14,
                     tile64,tile03,tile13,tile63,tile02,tile62,tile01,tile11,tile31,tile41,tile51,
-                    tile61,tile10,tile20,tile30
+                    tile61,tile10,tile20,tile30,tile60
             ).toMutableList()
 
     // Level
