@@ -1,26 +1,10 @@
-package ar.edu.unq.devit.dao
+package ar.edu.unq.devit.dao.levelsMongoData
 
 import ar.edu.unq.devit.model.*
 
-class LevelMongoData {
+class EasyLevelOne {
 
-    // DAO
-    var mongoDAO = LevelMongoDAO()
-
-    // Difficulty
-    var easy = Difficulty.Easy
-    var medium = Difficulty.Medium
-    var hard = Difficulty.Hard
-
-    // Action
-    var goUp = Action.GoUp
-    var goDown = Action.GoDown
-    var goLeft = Action.GoLeft
-    var goRight = Action.GoRight
-
-    // Positions
-    var posFinishLvl1 = Position(6,0)
-    var posPlayerLvl1 = Position(1,4)
+    val levelData = GenericLevelData
 
     // Level name
     var level1name = "Level One"
@@ -30,10 +14,10 @@ class LevelMongoData {
             " con la menor cantidad de instrucciones posible"
 
     // Finish element
-    var finish = Finish(posFinishLvl1)
+    var finish = Finish(Position(6,0))
 
     // Player element
-    var player = Player(posPlayerLvl1)
+    var player = Player(Position(1,4))
 
     // Paths element
     var tile13 = PathTile(Position(1,3))
@@ -56,16 +40,16 @@ class LevelMongoData {
             ).toMutableList()
 
     // Level
-    var levelOne = Level(easy,level1name,level1Elements,level1Desc,9)
+    private var levelOne = Level(levelData.easy,level1name,level1Elements,level1Desc,9)
 
-    fun createDefaultLevels(){
-        mongoDAO.startTransaction()
-        mongoDAO.safeSave(levelOne)
-        mongoDAO.commit()
+    fun createEasyLevelOne(){
+        levelData.levelDAO.startTransaction()
+        levelData.levelDAO.safeSave(levelOne)
+        levelData.levelDAO.commit()
     }
 
     fun deleteDefaultLevels(){
-        mongoDAO.deleteAll()
+        levelData.levelDAO.deleteAll()
     }
 
 }
