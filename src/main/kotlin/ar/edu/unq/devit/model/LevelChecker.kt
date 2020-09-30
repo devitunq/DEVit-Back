@@ -1,7 +1,7 @@
 package ar.edu.unq.devit.model
 
-import ar.edu.unq.devit.model.Errors.ModelMessages
-import ar.edu.unq.devit.model.Errors.OutOfPathException
+import ar.edu.unq.devit.model.errors.ModelMessages
+import ar.edu.unq.devit.model.errors.OutOfPathException
 
 class LevelChecker(var levelToCheck: Level, var actionList: MutableList<Action>) {
 
@@ -11,23 +11,23 @@ class LevelChecker(var levelToCheck: Level, var actionList: MutableList<Action>)
 
     private var fullGame : MutableList<List<LevelElement>> = mutableListOf(levelToCheck.elements.toList())
 
-    var comment: String = ""
+    var comment: String = LevelComments.LEVEL_INCOMPLETE
 
     private fun tryActionOrException(action: Action){
         actualPositionPlayer = action(actualPositionPlayer)
         levelToCheck.changePlayerPositionTo(actualPositionPlayer)
         if(!levelToCheck.tilesPositions().contains(actualPositionPlayer))
-            throw OutOfPathException(ModelMessages.outOfPathMessage)
+            throw OutOfPathException(ModelMessages.OUT_OF_PATH_EXCEPTION)
         else
             fullGame.add(levelToCheck.elements.toList())
     }
 
     private fun setSuccessLevelComment(){
         if(actionList.size == levelToCheck.bestNumberMovesToWin){
-            this.comment = LevelComments.successLevelBestWay
+            this.comment = LevelComments.LEVEL_COMPLETE_BEST_WAY
         }
         else{
-            this.comment = LevelComments.successLevel
+            this.comment = LevelComments.LEVEL_COMPLETE
         }
     }
 
@@ -44,10 +44,10 @@ class LevelChecker(var levelToCheck: Level, var actionList: MutableList<Action>)
                 levelToCheckState = LevelState.Complete
                 levelToCheck.removeFinish()
                 fullGame.removeAt(fullGame.size-1)
+                this.setSuccessLevelComment()
             }
-            this.setSuccessLevelComment()
         } catch(e: OutOfPathException){
-            this.comment = LevelComments.failedLevelByWater
+            this.comment = LevelComments.FAILED_LEVEL_BY_WATER
         }
         fullGame.add(levelToCheck.elements.toList())
         return SolutionResponse(levelToCheckState, this.comment, fullGame)

@@ -19,7 +19,7 @@ class LevelServiceTest {
 
     @AfterEach
     fun cleanData(){
-        //data.deleteDefaultLevels() Se utilizaria en caso de no querer persistir los datos.
+        //data.deleteDefaultLevels()
     }
 
     @Test

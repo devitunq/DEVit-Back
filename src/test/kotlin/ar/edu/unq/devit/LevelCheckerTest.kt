@@ -3,6 +3,7 @@ package ar.edu.unq.devit
 import ar.edu.unq.devit.helpersAndData.EasyLevel
 import ar.edu.unq.devit.model.Action
 import ar.edu.unq.devit.model.LevelChecker
+import ar.edu.unq.devit.model.LevelComments
 import ar.edu.unq.devit.model.LevelState
 import org.junit.Assert
 import org.junit.jupiter.api.BeforeEach
@@ -59,12 +60,10 @@ class LevelCheckerTest{
 
         var levelChecker = LevelChecker(data.levelTest,succesActionList)
 
-        try {
-            levelChecker.winOrLost()
-            fail("Se esperaba algun error de camino no accesible")
-        }catch (ex: Exception){
-            Assert.assertEquals(ex.message,"No hay camino por aquí")
-        }
+        var res = levelChecker.winOrLost()
+
+        Assert.assertEquals(LevelState.Incomplete, res.levelState)
+        Assert.assertEquals(LevelComments.FAILED_LEVEL_BY_WATER , res.comment)
     }
 
     @Test
@@ -73,8 +72,9 @@ class LevelCheckerTest{
                 listOf(Action.GoDown,Action.GoDown,Action.GoRight,Action.GoDown,Action.GoRight).toMutableList()
 
         var levelChecker = LevelChecker(data.levelTest,succesActionList)
-
-        Assert.assertTrue(levelChecker.winOrLost().levelState == LevelState.Incomplete)
+        var res = levelChecker.winOrLost()
+        Assert.assertEquals(LevelState.Incomplete, res.levelState)
+        Assert.assertEquals(LevelComments.LEVEL_INCOMPLETE, res.comment)
     }
 
 
