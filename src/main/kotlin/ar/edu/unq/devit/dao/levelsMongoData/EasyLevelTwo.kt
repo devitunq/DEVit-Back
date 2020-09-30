@@ -4,7 +4,7 @@ import ar.edu.unq.devit.model.*
 
 class EasyLevelTwo {
 
-    private val levelData = GenericLevelData
+    val levelData = GenericLevelData
 
 
     // Level name
