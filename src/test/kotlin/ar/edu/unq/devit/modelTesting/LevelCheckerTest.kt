@@ -1,6 +1,6 @@
-package ar.edu.unq.devit
+package ar.edu.unq.devit.modelTesting
 
-import ar.edu.unq.devit.helpersAndData.EasyLevel
+import ar.edu.unq.devit.modelTesting.helpersAndData.EasyLevel
 import ar.edu.unq.devit.model.Action
 import ar.edu.unq.devit.model.LevelChecker
 import ar.edu.unq.devit.model.LevelComments
@@ -8,8 +8,6 @@ import ar.edu.unq.devit.model.LevelState
 import org.junit.Assert
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.fail
-import java.lang.Exception
 
 class LevelCheckerTest{
 
