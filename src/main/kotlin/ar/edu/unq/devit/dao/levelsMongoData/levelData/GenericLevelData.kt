@@ -1,4 +1,4 @@
-package ar.edu.unq.devit.dao.levelsMongoData
+package ar.edu.unq.devit.dao.levelsMongoData.levelData
 
 import ar.edu.unq.devit.dao.LevelMongoDAO
 import ar.edu.unq.devit.model.Action

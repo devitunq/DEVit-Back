@@ -1,11 +1,10 @@
 package ar.edu.unq.devit
 
-import ar.edu.unq.devit.dao.levelsMongoData.EasyLevelOne
-import ar.edu.unq.devit.dao.levelsMongoData.EasyLevelTwo
+import ar.edu.unq.devit.dao.levelsMongoData.levelData.EasyLevelOne
+import ar.edu.unq.devit.dao.levelsMongoData.levelData.EasyLevelTwo
 import ar.edu.unq.devit.model.Difficulty
 import ar.edu.unq.devit.service.LevelService
 import org.junit.Assert
-import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 

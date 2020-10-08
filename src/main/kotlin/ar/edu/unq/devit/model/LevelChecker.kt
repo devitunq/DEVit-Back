@@ -1,11 +1,12 @@
 package ar.edu.unq.devit.model
 
-import ar.edu.unq.devit.model.errors.ModelMessages
-import ar.edu.unq.devit.model.errors.OutOfPathException
+import ar.edu.unq.devit.model.error.ModelMessages
+import ar.edu.unq.devit.model.error.OutOfPathException
+
 
 class LevelChecker(var levelToCheck: Level, var actionList: MutableList<Action>) {
 
-    var actualPositionPlayer = levelToCheck.playerPosition()
+    var actualPositionPlayer = levelToCheck.playerPosition
 
     var levelToCheckState = LevelState.Incomplete
 
@@ -14,9 +15,9 @@ class LevelChecker(var levelToCheck: Level, var actionList: MutableList<Action>)
     var comment: String = LevelComments.LEVEL_INCOMPLETE
 
     private fun tryActionOrException(action: Action){
-        actualPositionPlayer = action(actualPositionPlayer)
-        levelToCheck.changePlayerPositionTo(actualPositionPlayer)
-        if(!levelToCheck.tilesPositions().contains(actualPositionPlayer))
+        actualPositionPlayer = action(actualPositionPlayer!!)
+        levelToCheck.changePlayerPositionTo(actualPositionPlayer!!)
+        if(!levelToCheck.tilesPositions().contains(actualPositionPlayer!!))
             throw OutOfPathException(ModelMessages.OUT_OF_PATH_EXCEPTION)
         else
             fullGame.add(levelToCheck.elements.toList())

@@ -18,7 +18,7 @@ class LevelTest{
 
     @Test
     fun getPlayerPosition(){
-        var playerPos = data.levelTest.playerPosition()
+        var playerPos = data.levelTest.playerPosition!!
 
         val realPlayerPos = Position(1,1)
 

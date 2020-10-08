@@ -18,6 +18,8 @@ class Level {
     var description: String? = null
     @BsonProperty
     var bestNumberMovesToWin: Int? = null
+    @BsonProperty
+    var playerPosition: Position? = null
 
     constructor()
 
@@ -29,10 +31,9 @@ class Level {
         this.elements = elements
         this.description = description
         this.bestNumberMovesToWin = bestNumberMovesToWin
+        this.playerPosition = elements.find { e -> e is Player }?.position!!
     }
 
-
-    fun playerPosition(): Position =  elements.find { e -> e is Player }?.position!!
 
     fun tilesPositions(): MutableList<Position> = elements.filterIsInstance<PathTile>().map { e -> e.position!! }.toMutableList()
 
