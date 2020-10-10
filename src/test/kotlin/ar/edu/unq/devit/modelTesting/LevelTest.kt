@@ -3,18 +3,11 @@ package ar.edu.unq.devit.modelTesting
 import ar.edu.unq.devit.modelTesting.helpersAndData.EasyLevel
 import ar.edu.unq.devit.model.*
 import org.junit.Assert
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class LevelTest{
 
     var data = EasyLevel()
-
-
-    @BeforeEach
-    fun initializerLvlTesting(){
-        data.dataInitialize()
-    }
 
     @Test
     fun getPlayerPosition(){
