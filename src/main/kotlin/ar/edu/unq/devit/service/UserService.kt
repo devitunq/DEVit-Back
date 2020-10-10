@@ -17,7 +17,7 @@ import java.util.stream.Collectors
 class UserService {
 
     @Autowired
-    private lateinit var userDAO : UserMongoDAO
+    lateinit var userDAO : UserMongoDAO
 
     @Throws(InvalidSignIn::class)
     fun loginUser(user: User) : User {

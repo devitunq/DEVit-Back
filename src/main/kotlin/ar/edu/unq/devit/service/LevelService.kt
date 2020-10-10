@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 class LevelService {
 
     @Autowired
-    private lateinit var levelDAO : LevelMongoDAO
+    lateinit var levelDAO : LevelMongoDAO
 
     fun findByDifficulty(difficulty: Difficulty) : List<Level> = levelDAO.findEq("difficulty", difficulty.toString())
 

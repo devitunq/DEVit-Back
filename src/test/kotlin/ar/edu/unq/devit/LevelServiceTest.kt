@@ -1,18 +1,27 @@
 package ar.edu.unq.devit
 
+import ar.edu.unq.devit.dao.LevelMongoDAO
 import ar.edu.unq.devit.dao.levelsMongoData.levelData.EasyLevelOne
 import ar.edu.unq.devit.dao.levelsMongoData.levelData.EasyLevelTwo
 import ar.edu.unq.devit.model.Difficulty
 import ar.edu.unq.devit.service.LevelService
 import org.junit.Assert
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class LevelServiceTest {
 
     var lvl1EGenerator = EasyLevelOne()
     var lvl2EGenerator = EasyLevelTwo()
     var levelService = LevelService()
+
+    @BeforeAll
+    fun beforeData() {
+        levelService.levelDAO = LevelMongoDAO()
+    }
 
     @BeforeEach
     fun initialData(){
