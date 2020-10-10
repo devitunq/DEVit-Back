@@ -2,6 +2,7 @@ package ar.edu.unq.devit.model.user
 
 import ar.edu.unq.devit.model.error.InvalidSignIn
 import ar.edu.unq.devit.model.error.ModelMessages
+import org.bson.codecs.pojo.annotations.BsonIgnore
 import org.bson.codecs.pojo.annotations.BsonProperty
 
 class User{
@@ -17,6 +18,9 @@ class User{
     @BsonProperty
     var levelsIdPassed: MutableList<String>? = null
 
+    @BsonIgnore
+    var token : String? = null
+
     constructor()
 
     constructor(userName: String, password: String, nick: String){
@@ -31,12 +35,11 @@ class User{
         this.password = newPassword
     }
 
-    fun checkPassword (password: String) :Boolean {
-        var correctPassword = true
+    fun checkPassword (password: String) : Boolean {
         if (this.password != password){
             throw InvalidSignIn(ModelMessages.INVALID_SIGN_IN)
         }
-        return correctPassword
+        return true
     }
 
 }

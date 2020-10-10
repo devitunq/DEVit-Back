@@ -1,6 +1,8 @@
 package ar.edu.unq.devit.controller
 
 import ar.edu.unq.devit.model.*
+import ar.edu.unq.devit.model.error.InvalidSignIn
+import ar.edu.unq.devit.model.error.ModelMessages
 import ar.edu.unq.devit.model.user.User
 import ar.edu.unq.devit.service.LevelService
 import ar.edu.unq.devit.service.UserService
@@ -19,13 +21,13 @@ class UserController {
 
     @PostMapping
     @Throws(Exception::class)
-    fun getUserByUserAndPassoword(@RequestBody user: String, @RequestBody password: String): ResponseEntity<User> {
+    fun loginUser(@RequestBody user: User): ResponseEntity<User> {
         var response: User
         try {
-            response = service.findByUserAndPassoword(user, password)
-        } catch (e: Exception) {
+            response = service.loginUser(user)
+        } catch (e: InvalidSignIn) {
             println("Error: $e")
-            return ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
+            return ResponseEntity(HttpStatus.UNAUTHORIZED)
         }
         return ResponseEntity(response, HttpStatus.OK)
     }
