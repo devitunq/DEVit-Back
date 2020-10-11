@@ -6,18 +6,11 @@ import ar.edu.unq.devit.model.LevelChecker
 import ar.edu.unq.devit.model.LevelComments
 import ar.edu.unq.devit.model.LevelState
 import org.junit.Assert
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class LevelCheckerTest{
 
     var data = EasyLevel()
-
-
-    @BeforeEach
-    fun initializerLvlTesting(){
-        data.dataInitialize()
-    }
 
     @Test
     fun firstPosibleTravel(){

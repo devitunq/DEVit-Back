@@ -4,8 +4,6 @@ import ar.edu.unq.devit.model.*
 
 class EasyLevel{
 
-    var levelOneElementsList = mutableListOf<LevelElement>()
-
     var player = Player(Position(1,1))
 
     var finish = Finish(Position(4,4))
@@ -25,27 +23,17 @@ class EasyLevel{
     var tile43 = PathTile(Position(4,3))
     var tile44 = PathTile(Position(4,4))
 
-    var levelTest = Level()
+    var levelOneElementsList = listOf<LevelElement>(
+            player,finish,tile01,tile02,tile11,tile12,tile13,tile21,tile23,tile24,tile31,tile32,
+            tile34, tile42,tile43,tile44
+    ).toMutableList()
 
-    fun dataInitialize() {
-        levelOneElementsList.add(player)
-        levelOneElementsList.add(finish)
-        levelOneElementsList.add(tile01)
-        levelOneElementsList.add(tile02)
-        levelOneElementsList.add(tile11)
-        levelOneElementsList.add(tile12)
-        levelOneElementsList.add(tile13)
-        levelOneElementsList.add(tile21)
-        levelOneElementsList.add(tile23)
-        levelOneElementsList.add(tile24)
-        levelOneElementsList.add(tile31)
-        levelOneElementsList.add(tile32)
-        levelOneElementsList.add(tile34)
-        levelOneElementsList.add(tile42)
-        levelOneElementsList.add(tile43)
-        levelOneElementsList.add(tile44)
 
-        levelTest.elements = levelOneElementsList
-
-    }
+    var levelTest = Level(
+            Difficulty.Easy,
+            "Easy_Level One",
+            levelOneElementsList,
+            "",
+            6
+    )
 }
