@@ -23,7 +23,8 @@ fun main(args: Array<String>) {
 internal class WebSecurityConfig : WebSecurityConfigurerAdapter() {
 	@Throws(Exception::class)
 	override fun configure(http: HttpSecurity) {
-		http.csrf().disable()
+		http.cors()
+			.and().csrf().disable()
 				.addFilterAfter(JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter::class.java)
 				.authorizeRequests()
 				.antMatchers( "/api/user", "/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/**", "/swagger-ui.html", "/webjars/**").permitAll()

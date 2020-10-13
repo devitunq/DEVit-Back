@@ -21,7 +21,7 @@ class JWTAuthorizationFilter : OncePerRequestFilter() {
     @Throws(ServletException::class, IOException::class)
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, chain: FilterChain) {
         try {
-            if (jwtTokenExists(request, response)) {
+            if (jwtTokenExists(request)) {
                 val claims = validateToken(request)
                 if (claims["authorities"] != null) {
                     setUpSpringAuthentication(claims)
@@ -64,7 +64,7 @@ class JWTAuthorizationFilter : OncePerRequestFilter() {
         SecurityContextHolder.getContext().authentication = auth
     }
 
-    private fun jwtTokenExists(request: HttpServletRequest, res: HttpServletResponse): Boolean {
+    private fun jwtTokenExists(request: HttpServletRequest): Boolean {
         val authenticationHeader = request.getHeader(HEADER)
         return !(authenticationHeader == null || !authenticationHeader.startsWith(PREFIX))
     }
