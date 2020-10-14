@@ -27,7 +27,7 @@ class User{
         this.userName = userName
         this.password = password
         this.nick = nick
-        this.permission = UserPermission.FullAcces
+        this.permission = UserPermission.FullAccess
         this.levelsIdPassed = listOf<String>().toMutableList()
     }
 

@@ -1,8 +1,6 @@
 package ar.edu.unq.devit.controller
 
-import ar.edu.unq.devit.model.Difficulty
-import ar.edu.unq.devit.model.Level
-import ar.edu.unq.devit.model.user.UserPermission
+import ar.edu.unq.devit.model.user.User
 import ar.edu.unq.devit.service.GuestService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -20,10 +18,10 @@ class GuestController {
 
     @GetMapping
     @Throws(Exception::class)
-    fun getAllByDifficulty(): ResponseEntity<UserPermission> {
-        var response: UserPermission
+    fun loginAsGuest(@RequestParam nick: String): ResponseEntity<User> {
+        var response: User
         try {
-            response = service.getGuestPermision()!!
+            response = service.getGuestAccess(nick)
         } catch (e: Exception) {
             println("Error: $e")
             return ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)

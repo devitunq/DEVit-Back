@@ -3,6 +3,7 @@ package ar.edu.unq.devit.service
 import ar.edu.unq.devit.dao.UserMongoDAO
 import ar.edu.unq.devit.model.error.InvalidSignIn
 import ar.edu.unq.devit.model.user.User
+import ar.edu.unq.devit.security.getJWTToken
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.beans.factory.annotation.Autowired
@@ -22,27 +23,9 @@ class UserService {
     @Throws(InvalidSignIn::class)
     fun loginUser(user: User) : User {
         var usr = userDAO.getUser(user.userName!!, user.password!!)
-        usr.token = getJWTToken(user.userName!!)
+        usr.token = getJWTToken(user.userName!!, 86400000)
         usr.password = null
         return usr
     }
 
-    private fun getJWTToken(username: String): String? {
-        val secretKey = "D3v1T-s3Cr3t-k3y"
-        val grantedAuthorities = AuthorityUtils
-                .commaSeparatedStringToAuthorityList("ROLE_USER")
-        val token = Jwts
-                .builder()
-                .setId("dvJWT")
-                .setSubject(username)
-                .claim("authorities",
-                        grantedAuthorities.stream()
-                                .map { obj: GrantedAuthority -> obj.authority }
-                                .collect(Collectors.toList()))
-                .setIssuedAt(Date(System.currentTimeMillis()))
-                .setExpiration(Date(System.currentTimeMillis() + 86400000))
-                .signWith(SignatureAlgorithm.HS512,
-                        secretKey.toByteArray()).compact()
-        return "Bearer $token"
-    }
 }
