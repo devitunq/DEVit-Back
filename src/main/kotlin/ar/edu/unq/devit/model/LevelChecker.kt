@@ -16,7 +16,7 @@ class LevelChecker(var levelToCheck: Level, var actionList: MutableList<Action>)
 
     private fun tryActionOrException(action: Action){
         actualPositionPlayer = action(actualPositionPlayer!!)
-        levelToCheck.changePlayerPositionTo(actualPositionPlayer!!)
+        levelToCheck.changePlayerPositionToAndCollect(actualPositionPlayer!!)
         if(!levelToCheck.tilesPositions().contains(actualPositionPlayer!!))
             throw OutOfPathException(ModelMessages.OUT_OF_PATH_EXCEPTION)
         else

@@ -39,9 +39,13 @@ class Level {
 
     fun finishPosition(): Position = elements.find { e -> e is Finish }?.position!!
 
-    fun changePlayerPositionTo(pos: Position) {
-        elements.removeIf { e -> e is Player }
-        elements.add(Player(pos))
+    fun changePlayerPositionToAndCollect(pos: Position) {
+        var keys = (elements.find { e -> e is Player } as Player).keys
+        val keyInPos = elements.find { e -> e.position == pos && e is Key } as? Key
+        if (keyInPos !== null)
+            keys.add(keyInPos)
+        elements.removeIf { e -> e is Player || ( e.position == pos && e is Key) }
+        elements.add(Player(pos, keys))
     }
 
     fun removeFinish() {

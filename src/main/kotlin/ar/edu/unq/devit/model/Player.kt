@@ -12,9 +12,9 @@ class Player : LevelElement {
 
     constructor()
 
-    constructor(position: Position){
+    constructor(position: Position, keys: MutableList<Key> = mutableListOf()){
         this.position = position
-        this.keys = emptyList<Key>().toMutableList()
+        this.keys = keys
     }
 
 }
