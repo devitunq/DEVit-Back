@@ -2,6 +2,7 @@ package ar.edu.unq.devit
 
 import ar.edu.unq.devit.dao.LevelMongoDAO
 import ar.edu.unq.devit.dao.levelsMongoData.levelData.EasyLevelOne
+import ar.edu.unq.devit.dao.levelsMongoData.levelData.EasyLevelThree
 import ar.edu.unq.devit.dao.levelsMongoData.levelData.EasyLevelTwo
 import ar.edu.unq.devit.model.Difficulty
 import ar.edu.unq.devit.service.LevelService
@@ -16,6 +17,7 @@ class LevelServiceTest {
 
     var lvl1EGenerator = EasyLevelOne()
     var lvl2EGenerator = EasyLevelTwo()
+    var lvl3EGenerator = EasyLevelThree()
     var levelService = LevelService()
 
     @BeforeAll
@@ -27,6 +29,7 @@ class LevelServiceTest {
     fun initialData(){
         lvl1EGenerator.createEasyLevelOne()
         lvl2EGenerator.createEasyLevelTwo()
+        lvl3EGenerator.createEasyLevelThree()
     }
 
 //    @AfterEach
