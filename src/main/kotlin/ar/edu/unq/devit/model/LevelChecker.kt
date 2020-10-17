@@ -2,6 +2,7 @@ package ar.edu.unq.devit.model
 
 import ar.edu.unq.devit.model.error.ModelMessages
 import ar.edu.unq.devit.model.error.OutOfPathException
+import ar.edu.unq.devit.model.error.PlayerKeyNotFoundException
 
 
 class LevelChecker(var levelToCheck: Level, var actionList: MutableList<Action>) {
@@ -19,8 +20,12 @@ class LevelChecker(var levelToCheck: Level, var actionList: MutableList<Action>)
         levelToCheck.changePlayerPositionToAndCollect(actualPositionPlayer!!)
         if(!levelToCheck.tilesPositions().contains(actualPositionPlayer!!))
             throw OutOfPathException(ModelMessages.OUT_OF_PATH_EXCEPTION)
-        else
+        else {
+            //TODO REFACTOR PUTA MADRE.
+            if (levelToCheck.getLevelDoors().any { d -> d.position == actualPositionPlayer && !d.isOpen })
+                levelToCheck.openDoor()
             fullGame.add(levelToCheck.elements.toList())
+        }
     }
 
     private fun setSuccessLevelComment(){
@@ -49,6 +54,8 @@ class LevelChecker(var levelToCheck: Level, var actionList: MutableList<Action>)
             }
         } catch(e: OutOfPathException){
             this.comment = LevelComments.FAILED_LEVEL_BY_WATER
+        } catch (e: PlayerKeyNotFoundException) {
+            this.comment = LevelComments.FAILED_BY_NO_KEY
         }
         fullGame.add(levelToCheck.elements.toList())
         return SolutionResponse(levelToCheckState, this.comment, fullGame)

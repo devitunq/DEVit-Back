@@ -1,6 +1,8 @@
 package ar.edu.unq.devit.model
 
 
+import ar.edu.unq.devit.model.error.ModelMessages
+import ar.edu.unq.devit.model.error.PlayerKeyNotFoundException
 import org.bson.codecs.pojo.annotations.BsonProperty
 
 
@@ -39,6 +41,8 @@ class Level {
 
     fun finishPosition(): Position = elements.find { e -> e is Finish }?.position!!
 
+    fun getLevelDoors(): List<Door> = elements.filterIsInstance<Door>()
+
     fun changePlayerPositionToAndCollect(pos: Position) {
         var keys = (elements.find { e -> e is Player } as Player).keys
         val keyInPos = elements.find { e -> e.position == pos && e is Key } as? Key
@@ -50,5 +54,18 @@ class Level {
 
     fun removeFinish() {
         elements.removeIf { e -> e is Finish }
+    }
+
+    fun openDoor() {
+        var player = (elements.find { e -> e is Player } as Player)
+        var keys = player.keys
+        val doorInPos = elements.find { e -> e.position == player.position && e is Door } as Door
+        if (keys.size > 0) {
+            keys.removeAt(0)
+            doorInPos.isOpen = true
+            elements.removeIf { e -> e is Player || (e.position == player.position && e is Door) }
+            elements.addAll(listOf(Player(player.position!!, keys), doorInPos))
+        } else
+            throw PlayerKeyNotFoundException(ModelMessages.PLAYER_KEY_NOT_FOUND)
     }
 }

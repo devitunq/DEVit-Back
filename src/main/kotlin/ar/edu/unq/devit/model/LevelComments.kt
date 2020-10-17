@@ -9,4 +9,6 @@ object LevelComments {
     const val LEVEL_COMPLETE: String = "Bien hecho, lo has logrado, pero puedes mejorarlo"
 
     const val LEVEL_INCOMPLETE = "No has logrado llegar a la meta, vuelve a intentarlo"
+
+    const val FAILED_BY_NO_KEY = "No posees una llave para abrir la puerta."
 }
