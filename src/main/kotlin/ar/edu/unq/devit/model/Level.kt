@@ -59,12 +59,11 @@ class Level {
     fun openDoor() {
         var player = (elements.find { e -> e is Player } as Player)
         var keys = player.keys
-        val doorInPos = elements.find { e -> e.position == player.position && e is Door } as Door
         if (keys.size > 0) {
             keys.removeAt(0)
-            doorInPos.isOpen = true
+            val newDoor = Door(player.position, true)
             elements.removeIf { e -> e is Player || (e.position == player.position && e is Door) }
-            elements.addAll(listOf(Player(player.position!!, keys), doorInPos))
+            elements.addAll(listOf(newDoor, Player(player.position!!, keys)))
         } else
             throw PlayerKeyNotFoundException(ModelMessages.PLAYER_KEY_NOT_FOUND)
     }
