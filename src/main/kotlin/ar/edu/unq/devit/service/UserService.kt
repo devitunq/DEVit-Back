@@ -28,4 +28,10 @@ class UserService {
         return usr
     }
 
+    fun saveLevelSucces(userName: String, levelID: String){
+        var userToUpdate = userDAO.getBy("userName", userName)
+        userToUpdate!!.saveLevelSucces(levelID)
+        userDAO.updateBy(userToUpdate, "userName", userName)
+    }
+
 }

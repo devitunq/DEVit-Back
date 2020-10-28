@@ -42,4 +42,8 @@ class User{
         return true
     }
 
+    fun saveLevelSucces(levelId: String){
+        levelsIdPassed!!.add(levelId)
+    }
+
 }

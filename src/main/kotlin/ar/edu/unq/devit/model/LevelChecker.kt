@@ -15,6 +15,8 @@ class LevelChecker(var levelToCheck: Level, var actionList: MutableList<Action>)
 
     var comment: String = LevelComments.LEVEL_INCOMPLETE
 
+    var starsWons: Int = 0
+
     private fun tryActionOrException(action: Action){
         actualPositionPlayer = action(actualPositionPlayer!!)
         levelToCheck.changePlayerPositionToAndCollect(actualPositionPlayer!!)
@@ -51,6 +53,7 @@ class LevelChecker(var levelToCheck: Level, var actionList: MutableList<Action>)
                 levelToCheck.removeFinish()
                 fullGame.removeAt(fullGame.size-1)
                 this.setSuccessLevelComment()
+                starsWons = StarsSystem.calculateStars(levelToCheck.bestNumberMovesToWin!!,actionList.size)
             }
         } catch(e: OutOfPathException){
             this.comment = LevelComments.FAILED_LEVEL_BY_WATER
@@ -58,7 +61,7 @@ class LevelChecker(var levelToCheck: Level, var actionList: MutableList<Action>)
             this.comment = LevelComments.FAILED_BY_NO_KEY
         }
         fullGame.add(levelToCheck.elements.toList())
-        return SolutionResponse(levelToCheckState, this.comment, fullGame)
+        return SolutionResponse(levelToCheckState, this.comment, fullGame, starsWons)
     }
 
 }

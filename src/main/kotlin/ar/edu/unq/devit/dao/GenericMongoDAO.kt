@@ -34,6 +34,15 @@ open class GenericMongoDAO<T>(entityType: Class<T>) {
         }
     }
 
+    // Just admit string value.
+    fun updateBy(anObject: T, property:String, value: String?) {
+        if(connection.session != null) {
+            collection.replaceOne(connection.session!!, eq(property, value), anObject)
+        }else{
+            collection.replaceOne(eq(property, value), anObject)
+        }
+    }
+
     fun save(objects: List<T>) {
         if(connection.session != null) {
             collection.insertMany(connection.session!!, objects)

@@ -3,5 +3,6 @@ package ar.edu.unq.devit.model
 data class SolutionResponse(
         val levelState : LevelState,
         val comment: String,
-        val fullGame : List<List<LevelElement>> = listOf()
+        val fullGame : List<List<LevelElement>> = listOf(),
+        val starsWon: Int
 )
