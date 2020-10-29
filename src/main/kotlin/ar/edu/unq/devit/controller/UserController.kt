@@ -34,9 +34,9 @@ class UserController {
 
     @PostMapping("/saveLevel")
     @Throws(Exception::class)
-    fun saveLevelSucces(@RequestBody userName: String, levelID: String): ResponseEntity<String> {
+    fun saveLevelSucces(@RequestBody req: SaveUserLevelScoreRequest): ResponseEntity<String> {
         try {
-            service.saveLevelSucces(userName,levelID)
+            service.saveLevelSucces(req.userName, req.levelID)
         }catch(e: Exception){
             return ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         }
