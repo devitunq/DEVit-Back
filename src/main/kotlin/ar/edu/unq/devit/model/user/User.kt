@@ -1,5 +1,6 @@
 package ar.edu.unq.devit.model.user
 
+import ar.edu.unq.devit.model.StorableDataLevel
 import ar.edu.unq.devit.model.error.InvalidSignIn
 import ar.edu.unq.devit.model.error.ModelMessages
 import org.bson.codecs.pojo.annotations.BsonIgnore
@@ -16,7 +17,7 @@ class User{
     @BsonProperty
     var permission: UserPermission? = null
     @BsonProperty
-    var levelsIdPassed: MutableList<String>? = null
+    var levelsPassed: MutableList<StorableDataLevel>? = null
 
     @BsonIgnore
     var token : String? = null
@@ -28,7 +29,7 @@ class User{
         this.password = password
         this.nick = nick
         this.permission = UserPermission.FullAccess
-        this.levelsIdPassed = listOf<String>().toMutableList()
+        this.levelsPassed = listOf<StorableDataLevel>().toMutableList()
     }
 
     fun changePassword(newPassword: String){
@@ -42,8 +43,23 @@ class User{
         return true
     }
 
-    fun saveLevelSucces(levelId: String){
-        levelsIdPassed!!.add(levelId)
+    fun saveLevelSucces(levelData: StorableDataLevel){
+        if(isPreviousPassed(levelData.levelID!!)){
+            updateIfBestResultFromLevel(levelData.levelID!!, levelData.stars!!)
+        } else {
+            levelsPassed!!.add(levelData)
+        }
+    }
+
+    fun updateIfBestResultFromLevel(levelID: String, starsWon: Int){
+        var betterLevels = levelsPassed!!.filter { dl -> dl.levelID == levelID && dl.stars!! > starsWon }
+        if(betterLevels.isEmpty()){
+            this.levelsPassed!!.find { dl -> dl.levelID == levelID }!!.stars = starsWon
+        }
+    }
+
+    fun isPreviousPassed(levelID: String): Boolean{
+        return levelsPassed!!.find { dl -> dl.levelID == levelID } != null
     }
 
 }

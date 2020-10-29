@@ -1,6 +1,7 @@
 package ar.edu.unq.devit.modelTesting
 
 import ar.edu.unq.devit.dao.levelsMongoData.userData.GenericUserData
+import ar.edu.unq.devit.model.StorableDataLevel
 import ar.edu.unq.devit.model.error.InvalidSignIn
 import org.junit.Assert
 import org.junit.jupiter.api.Test
@@ -30,6 +31,23 @@ class UserTest {
         }catch (e: InvalidSignIn){
             Assert.assertTrue(e.message == "Usuario o contraseña no valida")
         }
+    }
+
+    @Test
+    fun saveLevelPassed(){
+        var newDataStorable = StorableDataLevel("rodrigo", "Easy_Level One", 2)
+        data.rodrigoUser.saveLevelSucces(newDataStorable)
+        Assert.assertEquals(1,data.rodrigoUser.levelsPassed!!.size)
+
+        var newDataStorable2 = StorableDataLevel("rodrigo", "Easy_Level One", 1)
+        data.rodrigoUser.saveLevelSucces(newDataStorable2)
+        Assert.assertEquals(1,data.rodrigoUser.levelsPassed!!.size)
+        Assert.assertEquals(2, data.rodrigoUser.levelsPassed!![0].stars)
+
+        var newDataStorable3 = StorableDataLevel("rodrigo", "Easy_Level One", 3)
+        data.rodrigoUser.saveLevelSucces(newDataStorable3)
+        Assert.assertEquals(1,data.rodrigoUser.levelsPassed!!.size)
+        Assert.assertEquals(3, data.rodrigoUser.levelsPassed!![0].stars)
     }
 
 
