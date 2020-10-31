@@ -22,6 +22,10 @@ class Level {
     var bestNumberMovesToWin: Int? = null
     @BsonProperty
     var playerPosition: Position? = null
+    @BsonProperty
+    var likes: Int = 0
+    @BsonProperty
+    var dislikes: Int = 0
 
     constructor()
 

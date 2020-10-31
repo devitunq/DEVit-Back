@@ -66,4 +66,15 @@ class LevelController {
         }
         return ResponseEntity(res, HttpStatus.OK)
     }
+
+    @PostMapping("/score/{levelId}")
+    @Throws(Exception::class)
+    fun scoreLevel(@PathVariable levelId: String, @RequestBody score: ScoreHeader): ResponseEntity<String> {
+        try {
+             service.scoreLevel(levelId, score.score!!)
+        } catch (e: Exception) {
+            return ResponseEntity("Error", HttpStatus.OK)
+        }
+        return ResponseEntity("Scored succes", HttpStatus.OK)
+    }
 }
