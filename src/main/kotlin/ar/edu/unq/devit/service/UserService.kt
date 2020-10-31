@@ -35,4 +35,9 @@ class UserService {
         userDAO.updateBy(userToUpdate, "userName", userName)
     }
 
+    fun getUserLevelsCompleted(userName: String): MutableList<StorableDataLevel>{
+        var user = userDAO.getBy("userName", userName)
+        return user!!.levelsPassed!!
+    }
+
 }

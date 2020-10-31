@@ -41,4 +41,16 @@ class UserController {
         return ResponseEntity("Saved succesfully", HttpStatus.OK)
     }
 
+    @GetMapping("/levelsCompleted")
+    @Throws(Exception::class)
+    fun getUserLevelsCompleted(@RequestParam userName: String): ResponseEntity<MutableList<StorableDataLevel>> {
+        var response: MutableList<StorableDataLevel>
+        try {
+            response = service.getUserLevelsCompleted(userName)
+        }catch(e: Exception){
+            println("Error: $e")
+            return ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+        return ResponseEntity(response, HttpStatus.OK)
+    }
 }
