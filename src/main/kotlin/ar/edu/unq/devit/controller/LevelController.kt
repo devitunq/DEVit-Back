@@ -71,10 +71,10 @@ class LevelController {
     @Throws(Exception::class)
     fun scoreLevel(@PathVariable levelId: String, @RequestBody score: ScoreHeader): ResponseEntity<String> {
         try {
-             service.scoreLevel(levelId, score.score!!)
+             service.scoreLevel(levelId, score.score!!, score.from!!)
         } catch (e: Exception) {
-            return ResponseEntity("Error", HttpStatus.OK)
+            return ResponseEntity(HttpStatus.OK)
         }
-        return ResponseEntity("Scored succes", HttpStatus.OK)
+        return ResponseEntity(HttpStatus.OK)
     }
 }

@@ -26,6 +26,8 @@ class Level {
     var likes: Int = 0
     @BsonProperty
     var dislikes: Int = 0
+    @BsonProperty
+    var scoreFromAndLevel: MutableSet<String> = mutableSetOf()
 
     constructor()
 
@@ -70,5 +72,20 @@ class Level {
             elements.addAll(listOf(newDoor, Player(player.position!!, keys)))
         } else
             throw PlayerKeyNotFoundException(ModelMessages.PLAYER_KEY_NOT_FOUND)
+    }
+
+    fun addCalificator(userName: String, levelId: String){
+        scoreFromAndLevel.add(userName + "_" + levelId)
+    }
+
+    fun addScore(score: String){
+        if(score == "Like"){ this.likes++ }
+        else{ this.dislikes++ }
+    }
+
+    fun isUserCalificator(userName: String, levelId: String): Boolean{
+        println(userName)
+        println(levelId)
+        return scoreFromAndLevel.contains(userName + "_" + levelId)
     }
 }
