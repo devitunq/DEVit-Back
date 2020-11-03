@@ -53,4 +53,18 @@ class UserController {
         }
         return ResponseEntity(response, HttpStatus.OK)
     }
+
+    @GetMapping("/completionProgress")
+    @Throws(Exception::class)
+    fun getUserCompletionProgress(@RequestParam userName: String): ResponseEntity<Int> {
+        var response: Int = 0
+        try {
+            response = service.getUserCompletionProgress(userName)
+        }catch(e: Exception){
+            println("Error: $e")
+            return ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+        return ResponseEntity(response, HttpStatus.OK)
+    }
+
 }

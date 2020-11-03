@@ -1,10 +1,10 @@
 package ar.edu.unq.devit.model
 
 enum class Action {
-    GoUp { override fun invoke(position: Position): Position = position.up()},
-    GoDown { override fun invoke(position: Position): Position = position.down()},
-    GoLeft { override fun invoke(position: Position): Position = position.left()},
-    GoRight { override fun invoke(position: Position): Position = position.right()};
+    GoUp { override fun invoke(checker: LevelChecker) { checker.actualPositionPlayer = checker.actualPositionPlayer!!.up() } },
+    GoDown { override fun invoke(checker: LevelChecker) { checker.actualPositionPlayer = checker.actualPositionPlayer!!.down() } },
+    GoLeft { override fun invoke(checker: LevelChecker) { checker.actualPositionPlayer = checker.actualPositionPlayer!!.left() }},
+    GoRight { override fun invoke(checker: LevelChecker) { checker.actualPositionPlayer = checker.actualPositionPlayer!!.right() }};
 
-    abstract operator fun invoke(position: Position): Position
+    abstract operator fun invoke(checker: LevelChecker)
 }

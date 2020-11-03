@@ -1,6 +1,7 @@
 package ar.edu.unq.devit.controller
 
 import ar.edu.unq.devit.model.*
+import ar.edu.unq.devit.model.Function
 import ar.edu.unq.devit.service.LevelService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -55,7 +56,7 @@ class LevelController {
 
     @PostMapping("/solve/{levelId}")
     @Throws(Exception::class)
-    fun solve(@PathVariable levelId: String, @RequestBody solution: List<Action>): ResponseEntity<SolutionResponse> {
+    fun solve(@PathVariable levelId: String, @RequestBody solution: List<Function>): ResponseEntity<SolutionResponse> {
         var res: SolutionResponse? = null
         try {
             var level = service.findByLevelId(levelId)

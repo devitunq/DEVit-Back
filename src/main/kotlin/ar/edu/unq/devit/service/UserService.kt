@@ -1,5 +1,6 @@
 package ar.edu.unq.devit.service
 
+import ar.edu.unq.devit.dao.LevelMongoDAO
 import ar.edu.unq.devit.dao.UserMongoDAO
 import ar.edu.unq.devit.model.StorableDataLevel
 import ar.edu.unq.devit.model.error.InvalidSignIn
@@ -21,6 +22,9 @@ class UserService {
     @Autowired
     lateinit var userDAO : UserMongoDAO
 
+    @Autowired
+    lateinit var levelMongoDAO: LevelMongoDAO
+
     @Throws(InvalidSignIn::class)
     fun loginUser(user: User) : User {
         var usr = userDAO.getUser(user.userName!!, user.password!!)
@@ -40,4 +44,9 @@ class UserService {
         return user!!.levelsPassed!!
     }
 
+    fun getUserCompletionProgress(userName: String): Int {
+        val user = userDAO.getBy("userName", userName)
+        val totalLevelCount = levelMongoDAO.numberOfLevelsInCollection()
+        return (user!!.levelsPassed!!.size * 100) / totalLevelCount
+    }
 }
