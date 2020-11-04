@@ -1,8 +1,7 @@
 package ar.edu.unq.devit.model
 
 
-import ar.edu.unq.devit.model.error.ModelMessages
-import ar.edu.unq.devit.model.error.PlayerKeyNotFoundException
+import ar.edu.unq.devit.model.error.*
 import org.bson.codecs.pojo.annotations.BsonProperty
 
 
@@ -47,24 +46,33 @@ class Level {
 
     fun finishPosition(): Position = elements.find { e -> e is Finish }?.position!!
 
-    fun getLevelDoors(): List<Door> = elements.filterIsInstance<Door>()
-
-    fun changePlayerPositionToAndCollect(pos: Position) {
-        var keys = (elements.find { e -> e is Player } as Player).keys
-        val keyInPos = elements.find { e -> e.position == pos && e is Key } as? Key
-        if (keyInPos !== null)
-            keys.add(keyInPos)
-        elements.removeIf { e -> e is Player || ( e.position == pos && e is Key) }
-        elements.add(Player(pos, keys))
+    fun tryAndMovePlayer(newPos: Position, lastKnownPosition: Position) {
+        val player = elements.find { e -> e is Player } as Player
+        val doorAtPlayerPos = elements.find { e -> e is Door && e.position == player.position } as? Door
+        if (newPos != lastKnownPosition && doorAtPlayerPos != null && !doorAtPlayerPos.isOpen) throw ClosedDoorException(ModelMessages.CLOSED_DOOR)
+        elements.removeIf { e -> e is Player }
+        elements.add(Player(newPos, player.keys))
     }
 
     fun removeFinish() {
         elements.removeIf { e -> e is Finish }
     }
 
+    fun doorAtPlayer() : Boolean {
+        val player = elements.find { e -> e is Player } as Player
+        return elements.find { e -> e is Door && e.position == player.position } as? Door != null
+    }
+
+    fun keyAtPlayer() : Boolean {
+        val player = elements.find { e -> e is Player } as Player
+        return elements.find { e -> e.position == player.position && e is Key } as? Key != null
+    }
+
     fun openDoor() {
-        var player = (elements.find { e -> e is Player } as Player)
-        var keys = player.keys
+        val player = (elements.find { e -> e is Player } as Player)
+        val doorAtPlayerPos = elements.find { e -> e is Door && e.position == player.position } as? Door ?: throw DoorNotFoundException(ModelMessages.DOOR_NOT_FOUND)
+        if (doorAtPlayerPos.isOpen) throw DoorAlreadyOpenException(ModelMessages.DOOR_ALREADY_OPEN)
+        val keys = player.keys
         if (keys.size > 0) {
             keys.removeAt(0)
             val newDoor = Door(player.position, true)
@@ -72,6 +80,15 @@ class Level {
             elements.addAll(listOf(newDoor, Player(player.position!!, keys)))
         } else
             throw PlayerKeyNotFoundException(ModelMessages.PLAYER_KEY_NOT_FOUND)
+    }
+
+    fun collectKey() {
+        val player = (elements.find { e -> e is Player } as Player)
+        val keys = player.keys
+        val keyInPos = elements.find { e -> e.position == player.position && e is Key } as? Key ?: throw KeyNotFoundException(ModelMessages.KEY_NOT_FOUND)
+        keys.add(keyInPos)
+        elements.removeIf { e -> e is Player || ( e.position == player.position && e is Key) }
+        elements.add(Player(player.position!!, keys))
     }
 
     fun addCalificator(userName: String, levelId: String){

@@ -29,7 +29,7 @@ class UserTest {
             data.rodrigoUser.checkPassword("123hj")
             fail("An error about password expected")
         }catch (e: InvalidSignIn){
-            Assert.assertTrue(e.message == "Usuario o contraseña no valida")
+            Assert.assertTrue(e.message == "Usuario o contraseña no valida.")
         }
     }
 
