@@ -19,12 +19,12 @@ class LevelService {
 
     fun getDificulties() : List<Difficulty> = levelDAO.findAll().map { level -> level.difficulty!! }.toSet().toList()
 
-    fun scoreLevel (levelID: String, score: String){
+    fun scoreLevel (levelID: String, score: String, from: String){
         var level = levelDAO.getBy("levelId", levelID)!!
-        println(score)
-        if(score == "Like"){ level.likes++ }
-        else{ level.dislikes++ }
-        levelDAO.updateBy(level, "levelId", levelID)
+        if (!level.isUserCalificator(from, levelID)){
+            level.addCalificator(from, levelID)
+            level.addScore(score)
+            levelDAO.updateBy(level, "levelId", levelID)
+        }
     }
-
 }
