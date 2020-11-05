@@ -80,6 +80,10 @@ open class GenericMongoDAO<T>(entityType: Class<T>) {
         return collection.find(filter).into(mutableListOf())
     }
 
+    fun numberOfDocuments() : Long {
+        return collection.countDocuments()
+    }
+
     fun <T> aggregate(pipeline:List<Bson> , resultClass:Class<T>): List<T> {
         if(connection.session != null) {
             return collection.aggregate(connection.session!!, pipeline, resultClass).into(ArrayList())

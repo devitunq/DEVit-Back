@@ -13,3 +13,7 @@ class DoorAlreadyOpenException(message: String) : Exception(message)
 class KeyNotFoundException(message: String) : Exception(message)
 
 class ClosedDoorException(message: String) : Exception(message)
+
+class PasswordsDontMatch(message:String) : Exception(message)
+
+class UserAlreadyExists(message:String) : Exception(message)

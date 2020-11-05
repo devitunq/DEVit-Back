@@ -23,7 +23,6 @@ class GuestController {
         try {
             response = service.getGuestAccess(nick)
         } catch (e: Exception) {
-            println("Error: $e")
             return ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         }
         return ResponseEntity(response, HttpStatus.OK)

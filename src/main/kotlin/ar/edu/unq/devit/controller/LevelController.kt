@@ -23,7 +23,6 @@ class LevelController {
         try {
             response = service.findByDifficulty(difficulty)
         } catch (e: Exception) {
-            println("Error: $e")
             return ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         }
         return ResponseEntity(response, HttpStatus.OK)
@@ -48,7 +47,6 @@ class LevelController {
         try {
             response = service.findByLevelId(levelId)
         } catch (e: Exception) {
-            println("Error: $e")
             return ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         }
         return ResponseEntity(response, HttpStatus.OK)

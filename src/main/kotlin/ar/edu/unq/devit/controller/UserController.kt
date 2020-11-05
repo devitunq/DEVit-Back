@@ -2,6 +2,8 @@ package ar.edu.unq.devit.controller
 
 import ar.edu.unq.devit.model.*
 import ar.edu.unq.devit.model.error.InvalidSignIn
+import ar.edu.unq.devit.model.error.PasswordsDontMatch
+import ar.edu.unq.devit.model.error.UserAlreadyExists
 import ar.edu.unq.devit.model.user.User
 import ar.edu.unq.devit.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,8 +26,21 @@ class UserController {
         try {
             response = service.loginUser(user)
         } catch (e: InvalidSignIn) {
-            println("Error: $e")
             return ResponseEntity(HttpStatus.UNAUTHORIZED)
+        }
+        return ResponseEntity(response, HttpStatus.OK)
+    }
+
+    @PostMapping("/register")
+    @Throws(Exception::class)
+    fun registerUser(@RequestBody registerRequest: RegisterRequest): ResponseEntity<*> {
+        var response: User
+        try {
+            response = service.registerUser(registerRequest)
+        } catch (e: PasswordsDontMatch) {
+            return ResponseEntity("Las contraseñas no coinciden", HttpStatus.BAD_REQUEST)
+        } catch (e: UserAlreadyExists) {
+            return ResponseEntity("El usuario ya existe", HttpStatus.PRECONDITION_FAILED)
         }
         return ResponseEntity(response, HttpStatus.OK)
     }
@@ -48,7 +63,6 @@ class UserController {
         try {
             response = service.getUserLevelsCompleted(userName)
         }catch(e: Exception){
-            println("Error: $e")
             return ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         }
         return ResponseEntity(response, HttpStatus.OK)
@@ -56,12 +70,11 @@ class UserController {
 
     @GetMapping("/completionProgress")
     @Throws(Exception::class)
-    fun getUserCompletionProgress(@RequestParam userName: String): ResponseEntity<Int> {
-        var response: Int = 0
+    fun getUserCompletionProgress(@RequestParam userName: String): ResponseEntity<Long> {
+        var response: Long
         try {
             response = service.getUserCompletionProgress(userName)
         }catch(e: Exception){
-            println("Error: $e")
             return ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         }
         return ResponseEntity(response, HttpStatus.OK)

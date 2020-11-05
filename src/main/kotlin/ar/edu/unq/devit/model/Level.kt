@@ -101,8 +101,6 @@ class Level {
     }
 
     fun isUserCalificator(userName: String, levelId: String): Boolean{
-        println(userName)
-        println(levelId)
         return scoreFromAndLevel.contains(userName + "_" + levelId)
     }
 }
