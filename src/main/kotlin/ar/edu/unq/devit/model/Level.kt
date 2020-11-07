@@ -46,12 +46,12 @@ class Level {
 
     fun finishPosition(): Position = elements.find { e -> e is Finish }?.position!!
 
-    fun tryAndMovePlayer(newPos: Position, lastKnownPosition: Position) {
+    fun tryAndMovePlayer(newPos: Position, lastKnownPosition: Position, lookingTo: LookingTo?) {
         val player = elements.find { e -> e is Player } as Player
         val doorAtPlayerPos = elements.find { e -> e is Door && e.position == player.position } as? Door
         if (newPos != lastKnownPosition && doorAtPlayerPos != null && !doorAtPlayerPos.isOpen) throw ClosedDoorException(ModelMessages.CLOSED_DOOR)
         elements.removeIf { e -> e is Player }
-        elements.add(Player(newPos, player.keys))
+        elements.add(Player(newPos, player.keys, lookingTo ?: player.lookingTo))
     }
 
     fun removeFinish() {
@@ -77,7 +77,7 @@ class Level {
             keys.removeAt(0)
             val newDoor = Door(player.position, true)
             elements.removeIf { e -> e is Player || (e.position == player.position && e is Door) }
-            elements.addAll(listOf(newDoor, Player(player.position!!, keys)))
+            elements.addAll(listOf(newDoor, Player(player.position!!, keys, player.lookingTo)))
         } else
             throw PlayerKeyNotFoundException(ModelMessages.PLAYER_KEY_NOT_FOUND)
     }
@@ -88,7 +88,7 @@ class Level {
         val keyInPos = elements.find { e -> e.position == player.position && e is Key } as? Key ?: throw KeyNotFoundException(ModelMessages.KEY_NOT_FOUND)
         keys.add(keyInPos)
         elements.removeIf { e -> e is Player || ( e.position == player.position && e is Key) }
-        elements.add(Player(player.position!!, keys))
+        elements.add(Player(player.position!!, keys, player.lookingTo))
     }
 
     fun addCalificator(userName: String, levelId: String){

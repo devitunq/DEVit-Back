@@ -3,7 +3,6 @@ package ar.edu.unq.devit.service
 import ar.edu.unq.devit.dao.LevelMongoDAO
 import ar.edu.unq.devit.model.Difficulty
 import ar.edu.unq.devit.model.Level
-import ar.edu.unq.devit.model.LevelScore
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 

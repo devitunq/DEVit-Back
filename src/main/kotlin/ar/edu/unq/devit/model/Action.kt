@@ -4,7 +4,7 @@ enum class Action {
     GoUp {
         override fun invoke(checker: LevelChecker) {
             val newPos = checker.actualPositionPlayer!!.up()
-            checker.levelToCheck.tryAndMovePlayer(newPos, checker.lastKnownPlayerPosition!!)
+            checker.levelToCheck.tryAndMovePlayer(newPos, checker.lastKnownPlayerPosition!!, null)
             checker.lastKnownPlayerPosition = checker.actualPositionPlayer
             checker.actualPositionPlayer = newPos
         }
@@ -12,7 +12,7 @@ enum class Action {
     GoDown {
         override fun invoke(checker: LevelChecker) {
             val newPos = checker.actualPositionPlayer!!.down()
-            checker.levelToCheck.tryAndMovePlayer(newPos, checker.lastKnownPlayerPosition!!)
+            checker.levelToCheck.tryAndMovePlayer(newPos, checker.lastKnownPlayerPosition!!, null)
             checker.lastKnownPlayerPosition = checker.actualPositionPlayer
             checker.actualPositionPlayer = newPos
         }
@@ -20,7 +20,7 @@ enum class Action {
     GoLeft {
         override fun invoke(checker: LevelChecker) {
             val newPos = checker.actualPositionPlayer!!.left()
-            checker.levelToCheck.tryAndMovePlayer(newPos, checker.lastKnownPlayerPosition!!)
+            checker.levelToCheck.tryAndMovePlayer(newPos, checker.lastKnownPlayerPosition!!, LookingTo.LEFT)
             checker.lastKnownPlayerPosition = checker.actualPositionPlayer
             checker.actualPositionPlayer = newPos
         }
@@ -28,7 +28,7 @@ enum class Action {
     GoRight {
         override fun invoke(checker: LevelChecker) {
             val newPos = checker.actualPositionPlayer!!.right()
-            checker.levelToCheck.tryAndMovePlayer(newPos, checker.lastKnownPlayerPosition!!)
+            checker.levelToCheck.tryAndMovePlayer(newPos, checker.lastKnownPlayerPosition!!, LookingTo.RIGHT)
             checker.lastKnownPlayerPosition = checker.actualPositionPlayer
             checker.actualPositionPlayer = newPos
         }

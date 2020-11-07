@@ -65,7 +65,7 @@ class EasyLevelThree {
                     level3name,
                     level3Elements,
                     level3Desc,
-                    14)
+                    16)
 
     fun createEasyLevelThree(){
         levelData.levelDAO.startTransaction()
