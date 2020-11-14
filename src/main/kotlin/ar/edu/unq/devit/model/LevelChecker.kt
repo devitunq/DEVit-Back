@@ -24,12 +24,15 @@ class LevelChecker(var levelToCheck: Level, var functionList: List<Function>) {
     private fun tryActionOrException(action: Action){
         if (canTryNextAction) {
             action(this)
-            if (!levelToCheck.tilesPositions().contains(actualPositionPlayer!!))
-                throw OutOfPathException(ModelMessages.OUT_OF_PATH_EXCEPTION)
-            else {
-                fullGame.add(levelToCheck.elements.toList())
-            }
         } else canTryNextAction = true
+    }
+
+    fun addIfValidPosition() {
+        if (!levelToCheck.tilesPositions().contains(actualPositionPlayer!!))
+            throw OutOfPathException(ModelMessages.OUT_OF_PATH_EXCEPTION)
+        else {
+            fullGame.add(levelToCheck.elements.toList())
+        }
     }
 
     private fun setSuccessLevelComment(){
@@ -41,8 +44,8 @@ class LevelChecker(var levelToCheck: Level, var functionList: List<Function>) {
         }
     }
 
-    private fun doActions(){
-        for (action in functionList[0].actionList)
+    fun doActions(actionList: List<Action>){
+        for (action in actionList)
             tryActionOrException(action)
     }
 
@@ -50,7 +53,7 @@ class LevelChecker(var levelToCheck: Level, var functionList: List<Function>) {
     fun winOrLost(): SolutionResponse {
         try {
             totalInstructions = functionList.fold(0, { acc, f -> acc +f.actionList.size })
-            if (functionList.isNotEmpty()) doActions()
+            if (functionList.isNotEmpty()) doActions(functionList[0].actionList)
             if(actualPositionPlayer == levelToCheck.finishPosition()) {
                 levelToCheckState = LevelState.Complete
                 levelToCheck.removeFinish()
