@@ -2,7 +2,7 @@ package ar.edu.unq.devit.service
 
 import ar.edu.unq.devit.dao.LevelMongoDAO
 import ar.edu.unq.devit.dao.UserMongoDAO
-import ar.edu.unq.devit.model.RegisterRequest
+import ar.edu.unq.devit.model.request.RegisterRequest
 import ar.edu.unq.devit.model.StorableDataLevel
 import ar.edu.unq.devit.model.error.InvalidSignIn
 import ar.edu.unq.devit.model.error.PasswordsDontMatch

@@ -1,6 +1,8 @@
 package ar.edu.unq.devit.dao.levelsMongoData.levelData
 
 import ar.edu.unq.devit.model.*
+import ar.edu.unq.devit.model.Level
+import ar.edu.unq.devit.model.levelElements.*
 
 class EasyLevelThree {
 
@@ -14,40 +16,40 @@ class EasyLevelThree {
             " con la menor cantidad de instrucciones posible"
 
     // Finish element
-    var finish = Finish(Position(6,0))
+    var finish = Finish(Position(6, 0))
 
     // Player element
-    var player = Player(Position(2,6))
+    var player = Player(Position(2, 6))
 
     // Door element
-    var key = Key(Position(0,6))
+    var key = Key(Position(0, 6))
 
-    var door = Door(Position(4,1))
+    var door = Door(Position(4, 1))
 
-    var tile06 = PathTile(Position(0,6))
-    var tile16 = PathTile(Position(1,6))
-    var tile26 = PathTile(Position(2,6))
-    var tile36 = PathTile(Position(3,6))
-    var tile46 = PathTile(Position(4,6))
-    var tile56 = PathTile(Position(5,6))
-    var tile05 = PathTile(Position(0,5))
-    var tile25 = PathTile(Position(2,5))
-    var tile55 = PathTile(Position(5,5))
-    var tile04 = PathTile(Position(0,4))
-    var tile24 = PathTile(Position(2,4))
-    var tile34 = PathTile(Position(3,4))
-    var tile64 = PathTile(Position(6,4))
-    var tile03 = PathTile(Position(0,3))
-    var tile33 = PathTile(Position(3,3))
-    var tile63 = PathTile(Position(6,3))
-    var tile12 = PathTile(Position(1,2))
-    var tile32 = PathTile(Position(3,2))
-    var tile21 = PathTile(Position(2,1))
-    var tile31 = PathTile(Position(3,1))
-    var tile41 = PathTile(Position(4,1))
-    var tile51 = PathTile(Position(5,1))
-    var tile50 = PathTile(Position(5,0))
-    var tile60 = PathTile(Position(6,0))
+    var tile06 = PathTile(Position(0, 6))
+    var tile16 = PathTile(Position(1, 6))
+    var tile26 = PathTile(Position(2, 6))
+    var tile36 = PathTile(Position(3, 6))
+    var tile46 = PathTile(Position(4, 6))
+    var tile56 = PathTile(Position(5, 6))
+    var tile05 = PathTile(Position(0, 5))
+    var tile25 = PathTile(Position(2, 5))
+    var tile55 = PathTile(Position(5, 5))
+    var tile04 = PathTile(Position(0, 4))
+    var tile24 = PathTile(Position(2, 4))
+    var tile34 = PathTile(Position(3, 4))
+    var tile64 = PathTile(Position(6, 4))
+    var tile03 = PathTile(Position(0, 3))
+    var tile33 = PathTile(Position(3, 3))
+    var tile63 = PathTile(Position(6, 3))
+    var tile12 = PathTile(Position(1, 2))
+    var tile32 = PathTile(Position(3, 2))
+    var tile21 = PathTile(Position(2, 1))
+    var tile31 = PathTile(Position(3, 1))
+    var tile41 = PathTile(Position(4, 1))
+    var tile51 = PathTile(Position(5, 1))
+    var tile50 = PathTile(Position(5, 0))
+    var tile60 = PathTile(Position(6, 0))
 
     // Paths element
     // Elements list

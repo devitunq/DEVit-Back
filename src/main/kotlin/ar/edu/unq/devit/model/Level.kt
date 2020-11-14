@@ -2,6 +2,7 @@ package ar.edu.unq.devit.model
 
 
 import ar.edu.unq.devit.model.error.*
+import ar.edu.unq.devit.model.levelElements.*
 import org.bson.codecs.pojo.annotations.BsonProperty
 
 
@@ -51,7 +52,8 @@ class Level {
         val doorAtPlayerPos = elements.find { e -> e is Door && e.position == player.position } as? Door
         if (newPos != lastKnownPosition && doorAtPlayerPos != null && !doorAtPlayerPos.isOpen) throw ClosedDoorException(ModelMessages.CLOSED_DOOR)
         elements.removeIf { e -> e is Player }
-        elements.add(Player(newPos, player.keys, lookingTo ?: player.lookingTo))
+        elements.add(Player(newPos, player.keys, lookingTo
+                ?: player.lookingTo))
     }
 
     fun removeFinish() {
@@ -70,7 +72,8 @@ class Level {
 
     fun openDoor() {
         val player = (elements.find { e -> e is Player } as Player)
-        val doorAtPlayerPos = elements.find { e -> e is Door && e.position == player.position } as? Door ?: throw DoorNotFoundException(ModelMessages.DOOR_NOT_FOUND)
+        val doorAtPlayerPos = elements.find { e -> e is Door && e.position == player.position } as? Door
+                ?: throw DoorNotFoundException(ModelMessages.DOOR_NOT_FOUND)
         if (doorAtPlayerPos.isOpen) throw DoorAlreadyOpenException(ModelMessages.DOOR_ALREADY_OPEN)
         val keys = player.keys
         if (keys.size > 0) {
@@ -85,7 +88,8 @@ class Level {
     fun collectKey() {
         val player = (elements.find { e -> e is Player } as Player)
         val keys = player.keys
-        val keyInPos = elements.find { e -> e.position == player.position && e is Key } as? Key ?: throw KeyNotFoundException(ModelMessages.KEY_NOT_FOUND)
+        val keyInPos = elements.find { e -> e.position == player.position && e is Key } as? Key
+                ?: throw KeyNotFoundException(ModelMessages.KEY_NOT_FOUND)
         keys.add(keyInPos)
         elements.removeIf { e -> e is Player || ( e.position == player.position && e is Key) }
         elements.add(Player(player.position!!, keys, player.lookingTo))

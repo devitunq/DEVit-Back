@@ -1,6 +1,10 @@
 package ar.edu.unq.devit.dao.levelsMongoData.levelData
 
 import ar.edu.unq.devit.model.*
+import ar.edu.unq.devit.model.Level
+import ar.edu.unq.devit.model.levelElements.Finish
+import ar.edu.unq.devit.model.levelElements.PathTile
+import ar.edu.unq.devit.model.levelElements.Player
 
 class EasyLevelOne {
 
@@ -14,22 +18,22 @@ class EasyLevelOne {
             " con la menor cantidad de instrucciones posible"
 
     // Finish element
-    var finish = Finish(Position(6,0))
+    var finish = Finish(Position(6, 0))
 
     // Player element
-    var player = Player(Position(1,4))
+    var player = Player(Position(1, 4))
 
     // Paths element
-    var tile13 = PathTile(Position(1,3))
-    var tile12 = PathTile(Position(1,2))
-    var tile14 = PathTile(Position(1,4))
-    var tile22 = PathTile(Position(2,2))
-    var tile32 = PathTile(Position(3,2))
-    var tile42 = PathTile(Position(4,2))
-    var tile41 = PathTile(Position(4,1))
-    var tile51 = PathTile(Position(5,1))
-    var tile61 = PathTile(Position(6,1))
-    var tile60 = PathTile(Position(6,0))
+    var tile13 = PathTile(Position(1, 3))
+    var tile12 = PathTile(Position(1, 2))
+    var tile14 = PathTile(Position(1, 4))
+    var tile22 = PathTile(Position(2, 2))
+    var tile32 = PathTile(Position(3, 2))
+    var tile42 = PathTile(Position(4, 2))
+    var tile41 = PathTile(Position(4, 1))
+    var tile51 = PathTile(Position(5, 1))
+    var tile61 = PathTile(Position(6, 1))
+    var tile60 = PathTile(Position(6, 0))
 
 
 
@@ -40,7 +44,7 @@ class EasyLevelOne {
             ).toMutableList()
 
     // Level
-    private var levelOne = Level(levelData.easy,level1name,level1Elements,level1Desc,9)
+    private var levelOne = Level(levelData.easy, level1name, level1Elements, level1Desc, 9)
 
     fun createEasyLevelOne(){
         levelData.levelDAO.startTransaction()

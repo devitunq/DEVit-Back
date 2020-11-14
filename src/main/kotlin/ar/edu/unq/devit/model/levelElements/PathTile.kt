@@ -1,11 +1,10 @@
-package ar.edu.unq.devit.model
+package ar.edu.unq.devit.model.levelElements
 
+import ar.edu.unq.devit.model.Position
 import org.bson.codecs.pojo.annotations.BsonDiscriminator
-import org.bson.codecs.pojo.annotations.BsonProperty
 
-@BsonDiscriminator(value = "Finish", key = "type")
-class Finish : LevelElement {
-
+@BsonDiscriminator(value = "PathTile", key = "type")
+class PathTile : LevelElement {
     override var position: Position? = null
 
     constructor()

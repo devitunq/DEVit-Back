@@ -1,5 +1,4 @@
 package ar.edu.unq.devit.model
-
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 

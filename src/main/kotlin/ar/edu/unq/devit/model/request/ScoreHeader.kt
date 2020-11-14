@@ -1,4 +1,4 @@
-package ar.edu.unq.devit.model
+package ar.edu.unq.devit.model.request
 
 class ScoreHeader(){
 

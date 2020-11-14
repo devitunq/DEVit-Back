@@ -1,5 +1,6 @@
-package ar.edu.unq.devit.model
+package ar.edu.unq.devit.model.levelElements
 
+import ar.edu.unq.devit.model.*
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 import org.bson.codecs.pojo.annotations.BsonDiscriminator
