@@ -26,4 +26,8 @@ class LevelService {
             levelDAO.updateBy(level, "levelId", levelID)
         }
     }
+
+    fun saveLevel(level: Level) = levelDAO.safeSave(level)
+
+
 }

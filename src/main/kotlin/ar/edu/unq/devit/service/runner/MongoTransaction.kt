@@ -48,7 +48,7 @@ class MongoTransaction: Transaction{
     init {
         val codecRegistry: CodecRegistry = CodecRegistries.fromRegistries(
                 MongoClientSettings.getDefaultCodecRegistry(),
-                CodecRegistries.fromProviders(PojoCodecProvider.builder().register("ar.edu.unq.devit.model","ar.edu.unq.devit.model.user").build())
+                CodecRegistries.fromProviders(PojoCodecProvider.builder().register("ar.edu.unq.devit.model","ar.edu.unq.devit.model.user","ar.edu.unq.devit.model.levelElements").build())
         )
 
         val uri = System.getenv().getOrDefault("MONGO_URI","mongodb+srv://devitmongo:devitmongo@cluster0.mvdfz.mongodb.net/devit_mongo?retryWrites=true&w=majority")

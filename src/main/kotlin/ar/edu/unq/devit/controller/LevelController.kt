@@ -2,6 +2,9 @@ package ar.edu.unq.devit.controller
 
 import ar.edu.unq.devit.model.*
 import ar.edu.unq.devit.model.Function
+import ar.edu.unq.devit.model.Level
+import ar.edu.unq.devit.model.request.ScoreHeader
+import ar.edu.unq.devit.model.request.SolutionResponse
 import ar.edu.unq.devit.service.LevelService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -76,4 +79,16 @@ class LevelController {
         }
         return ResponseEntity(HttpStatus.OK)
     }
+
+    @PostMapping("/save")
+    @Throws(Exception::class)
+    fun saveLevel(@RequestBody level: Level): ResponseEntity<String>{
+        try{
+            service.saveLevel(level)
+        } catch (e: Exception){
+            return ResponseEntity(e.message, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+        return ResponseEntity(HttpStatus.OK)
+    }
+
 }

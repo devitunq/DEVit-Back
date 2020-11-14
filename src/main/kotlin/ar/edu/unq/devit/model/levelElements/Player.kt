@@ -1,7 +1,8 @@
-package ar.edu.unq.devit.model
+package ar.edu.unq.devit.model.levelElements
 
+import ar.edu.unq.devit.model.LookingTo
+import ar.edu.unq.devit.model.Position
 import org.bson.codecs.pojo.annotations.BsonDiscriminator
-import org.bson.codecs.pojo.annotations.BsonProperty
 
 
 @BsonDiscriminator(value = "Player", key = "type")
@@ -20,9 +21,4 @@ class Player : LevelElement {
         this.lookingTo = lookingTo
     }
 
-}
-
-enum class LookingTo {
-    LEFT,
-    RIGHT
 }

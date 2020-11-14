@@ -1,6 +1,7 @@
 package ar.edu.unq.devit.controller
 
-import ar.edu.unq.devit.model.*
+import ar.edu.unq.devit.model.request.RegisterRequest
+import ar.edu.unq.devit.model.StorableDataLevel
 import ar.edu.unq.devit.model.error.InvalidSignIn
 import ar.edu.unq.devit.model.error.PasswordsDontMatch
 import ar.edu.unq.devit.model.error.UserAlreadyExists

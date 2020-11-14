@@ -1,5 +1,7 @@
 package ar.edu.unq.devit.model
 
+import ar.edu.unq.devit.model.levelElements.Door
+import ar.edu.unq.devit.model.levelElements.LevelElement
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 import org.bson.codecs.pojo.annotations.BsonDiscriminator

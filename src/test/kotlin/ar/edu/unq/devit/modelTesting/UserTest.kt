@@ -6,14 +6,13 @@ import ar.edu.unq.devit.model.error.InvalidSignIn
 import org.junit.Assert
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.fail
-import java.lang.AssertionError
 
 class UserTest {
 
     var data = GenericUserData()
 
     @Test
-    fun changeUserPassowor(){
+    fun changeUserPassoword(){
         data.rodrigoUser.changePassword("123456")
         Assert.assertTrue(data.rodrigoUser.password == "123456" )
     }
@@ -46,6 +45,11 @@ class UserTest {
 
         var newDataStorable3 = StorableDataLevel("rodrigo", "Easy_Level One", 3)
         data.rodrigoUser.saveLevelSucces(newDataStorable3)
+        Assert.assertEquals(1,data.rodrigoUser.levelsPassed!!.size)
+        Assert.assertEquals(3, data.rodrigoUser.levelsPassed!![0].stars)
+
+        var newDataStorable4 = StorableDataLevel("rodrigo", "Easy_Level One", 3)
+        data.rodrigoUser.saveLevelSucces(newDataStorable4)
         Assert.assertEquals(1,data.rodrigoUser.levelsPassed!!.size)
         Assert.assertEquals(3, data.rodrigoUser.levelsPassed!![0].stars)
     }

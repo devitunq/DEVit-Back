@@ -1,5 +1,6 @@
 package ar.edu.unq.devit.model
 
+
 enum class Action {
     GoUp {
         override fun invoke(checker: LevelChecker) {

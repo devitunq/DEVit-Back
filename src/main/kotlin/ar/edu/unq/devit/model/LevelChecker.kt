@@ -1,6 +1,8 @@
 package ar.edu.unq.devit.model
 
+import ar.edu.unq.devit.model.request.SolutionResponse
 import ar.edu.unq.devit.model.error.*
+import ar.edu.unq.devit.model.levelElements.LevelElement
 
 
 class LevelChecker(var levelToCheck: Level, var functionList: List<Function>) {
