@@ -3,6 +3,7 @@ package ar.edu.unq.devit.controller
 import ar.edu.unq.devit.model.*
 import ar.edu.unq.devit.model.Function
 import ar.edu.unq.devit.model.Level
+import ar.edu.unq.devit.model.request.LevelSolutionHeader
 import ar.edu.unq.devit.model.request.ScoreHeader
 import ar.edu.unq.devit.model.request.SolutionResponse
 import ar.edu.unq.devit.service.LevelService
@@ -84,11 +85,27 @@ class LevelController {
     @Throws(Exception::class)
     fun saveLevel(@RequestBody level: Level): ResponseEntity<String>{
         try{
+            if (service.isExistenteLevel(level.levelId!!))
+                throw Exception("Nombre ya existente")
             service.saveLevel(level)
         } catch (e: Exception){
             return ResponseEntity(e.message, HttpStatus.INTERNAL_SERVER_ERROR)
         }
         return ResponseEntity(HttpStatus.OK)
+    }
+
+    @PostMapping("/solveNewLevel")
+    @Throws(Exception::class)
+    fun saveLevel(@RequestBody levelAndSol: LevelSolutionHeader): ResponseEntity<SolutionResponse>{
+        var res: SolutionResponse? = null
+        try{
+           if (levelAndSol.actionList!![0].actionList.size > levelAndSol.level!!.bestNumberMovesToWin!!)
+               throw Exception("Cantidad de movimientos no valida") //REVISAr
+            res = LevelChecker(levelAndSol.level, levelAndSol.actionList!!.toMutableList()).winOrLost()
+        } catch (e: Exception){
+            return ResponseEntity(res, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+        return ResponseEntity(res, HttpStatus.OK)
     }
 
 }
