@@ -94,14 +94,26 @@ class LevelController {
         return ResponseEntity(HttpStatus.OK)
     }
 
+    @GetMapping("/checkName")
+    @Throws(Exception::class)
+    fun checkLevelName(@RequestParam levelId: String): ResponseEntity<Boolean> {
+        var isExistentLvl: Boolean
+        try {
+            isExistentLvl = service.isExistenteLevel(levelId)
+        } catch (e: Exception) {
+            return ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+        return ResponseEntity(isExistentLvl, HttpStatus.OK)
+    }
+
     @PostMapping("/solveNewLevel")
     @Throws(Exception::class)
     fun saveLevel(@RequestBody levelAndSol: LevelSolutionHeader): ResponseEntity<SolutionResponse>{
         var res: SolutionResponse? = null
         try{
            if (levelAndSol.actionList!![0].actionList.size > levelAndSol.level!!.bestNumberMovesToWin!!)
-               throw Exception("Cantidad de movimientos no valida") //REVISAr
-            res = LevelChecker(levelAndSol.level, levelAndSol.actionList!!.toMutableList()).winOrLost()
+               throw Exception("Cantidad de movimientos no valida")
+            res = LevelChecker(levelAndSol.level, levelAndSol.actionList.toMutableList()).winOrLost()
         } catch (e: Exception){
             return ResponseEntity(res, HttpStatus.INTERNAL_SERVER_ERROR)
         }
