@@ -1,11 +1,8 @@
 package ar.edu.unq.devit.modelTesting
 
-import ar.edu.unq.devit.modelTesting.helpersAndData.EasyLevel
-import ar.edu.unq.devit.model.Action
+import ar.edu.unq.devit.model.*
 import ar.edu.unq.devit.model.Function
-import ar.edu.unq.devit.model.LevelChecker
-import ar.edu.unq.devit.model.LevelComments
-import ar.edu.unq.devit.model.LevelState
+import ar.edu.unq.devit.modelTesting.helpersAndData.EasyLevel
 import org.junit.Assert
 import org.junit.jupiter.api.Test
 
@@ -16,7 +13,7 @@ class LevelCheckerTest{
     @Test
     fun firstPosibleTravel(){
         var succesActionList =
-                listOf(Function("f1", listOf(Action.GoDown,Action.GoDown,Action.GoRight,Action.GoDown,Action.GoRight,Action.GoRight)))
+                listOf(Function("f1", listOf(GoDown(),GoDown(),GoRight(),GoDown(),GoRight(),GoRight())))
 
         var levelChecker = LevelChecker(data.levelTest,succesActionList)
 
@@ -26,7 +23,7 @@ class LevelCheckerTest{
     @Test
     fun secondPosibleTravel(){
         var succesActionList =
-                listOf(Function("f1", listOf(Action.GoRight,Action.GoRight,Action.GoDown,Action.GoRight,Action.GoDown,Action.GoDown)))
+                listOf(Function("f1", listOf(GoRight(),GoRight(),GoDown(),GoRight(),GoDown(),GoDown())))
 
         var levelChecker = LevelChecker(data.levelTest,succesActionList)
 
@@ -36,8 +33,8 @@ class LevelCheckerTest{
     @Test
     fun thirdPosibleTravel(){
         var succesActionList =
-                listOf(Function("f1", listOf(Action.GoLeft,Action.GoDown,Action.GoRight,Action.GoDown,Action.GoRight,Action.GoDown,
-                        Action.GoRight,Action.GoRight)))
+                listOf(Function("f1", listOf(GoLeft(),GoDown(),GoRight(),GoDown(),GoRight(),GoDown(),
+                        GoRight(),GoRight())))
 
         var levelChecker = LevelChecker(data.levelTest,succesActionList)
 
@@ -48,7 +45,7 @@ class LevelCheckerTest{
     @Test
     fun notPosibleTravel(){
         var succesActionList =
-                listOf(Function("f1", listOf(Action.GoLeft,Action.GoDown,Action.GoDown)))
+                listOf(Function("f1", listOf(GoLeft(),GoDown(),GoDown())))
 
         var levelChecker = LevelChecker(data.levelTest,succesActionList)
 
@@ -61,7 +58,7 @@ class LevelCheckerTest{
     @Test
     fun incompletePosibleTravel(){
         var succesActionList =
-                listOf(Function("f1", listOf(Action.GoDown,Action.GoDown,Action.GoRight,Action.GoDown,Action.GoRight)))
+                listOf(Function("f1", listOf(GoDown(),GoDown(),GoRight(),GoDown(),GoRight())))
 
         var levelChecker = LevelChecker(data.levelTest,succesActionList)
         var res = levelChecker.winOrLost()

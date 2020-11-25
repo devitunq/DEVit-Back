@@ -1,8 +1,7 @@
 package ar.edu.unq.devit.dao.levelsMongoData.levelData
 
 import ar.edu.unq.devit.dao.LevelMongoDAO
-import ar.edu.unq.devit.model.Action
-import ar.edu.unq.devit.model.Difficulty
+import ar.edu.unq.devit.model.*
 
 object GenericLevelData {
 
@@ -12,9 +11,9 @@ object GenericLevelData {
     val medium = Difficulty.Medium
     val hard = Difficulty.Hard
 
-    val goUp = Action.GoUp
-    val goDown = Action.GoDown
-    val goLeft = Action.GoLeft
-    val goRight = Action.GoRight
+    val goUp = GoUp()
+    val goDown = GoDown()
+    val goLeft = GoLeft()
+    val goRight = GoRight()
 
 }
