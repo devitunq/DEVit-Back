@@ -12,7 +12,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo
         JsonSubTypes.Type(value = CollectKey::class, name = "CollectKey"),
         JsonSubTypes.Type(value = OpenDoor::class, name = "OpenDoor"),
         JsonSubTypes.Type(value = DoorCondition::class, name = "DoorCondition"),
-        JsonSubTypes.Type(value = KeyCondition::class, name = "KeyCondition")
+        JsonSubTypes.Type(value = KeyCondition::class, name = "KeyCondition"),
+        JsonSubTypes.Type(value = KeyCondition::class, name = "Board1Call"),
+        JsonSubTypes.Type(value = KeyCondition::class, name = "Board2Call")
 )
 interface Action {
     var times : Int
@@ -95,14 +97,14 @@ class KeyCondition : Action {
         checker.addIfValidPosition()
     }
 }
-class F1CALL : Action {
+class Board1Call : Action {
     override var times: Int = 1
     override fun invoke(checker: LevelChecker) {
         checker.doActions(checker.functionList[0].actionList)
     }
 }
 
-class F2CALL : Action {
+class Board2Call : Action {
     override var times: Int = 1
     override fun invoke(checker: LevelChecker) {
         checker.doActions(if (checker.functionList.size == 2) checker.functionList[1].actionList else listOf())
