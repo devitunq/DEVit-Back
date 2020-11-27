@@ -13,8 +13,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo
         JsonSubTypes.Type(value = OpenDoor::class, name = "OpenDoor"),
         JsonSubTypes.Type(value = DoorCondition::class, name = "DoorCondition"),
         JsonSubTypes.Type(value = KeyCondition::class, name = "KeyCondition"),
-        JsonSubTypes.Type(value = KeyCondition::class, name = "Board1Call"),
-        JsonSubTypes.Type(value = KeyCondition::class, name = "Board2Call")
+        JsonSubTypes.Type(value = Board1Call::class, name = "Board1Call"),
+        JsonSubTypes.Type(value = Board2Call::class, name = "Board2Call")
 )
 interface Action {
     var times : Int
