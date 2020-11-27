@@ -67,7 +67,7 @@ class Level {
 
     fun keyAtPlayer() : Boolean {
         val player = elements.find { e -> e is Player } as Player
-        return elements.find { e -> e.position == player.position && e is Key } as? Key != null
+        return elements.find { e -> e.position == player.position && e is Key || (e is Conceal && e.hiddenElement is Key) }  != null
     }
 
     fun openDoor() {
@@ -88,9 +88,10 @@ class Level {
     fun collectKey() {
         val player = (elements.find { e -> e is Player } as Player)
         val keys = player.keys
-        val keyInPos = elements.find { e -> e.position == player.position && e is Key } as? Key
-                ?: throw KeyNotFoundException(ModelMessages.KEY_NOT_FOUND)
-        keys.add(keyInPos)
+        val keyOrConcealInPos : LevelElement? = elements.find { e -> e.position == player.position && e is Key || (e is Conceal && e.hiddenElement is Key) }
+        if (keyOrConcealInPos !is Key && keyOrConcealInPos !is Conceal) throw KeyNotFoundException(ModelMessages.KEY_NOT_FOUND)
+        val key : Key = if (keyOrConcealInPos is Key) keyOrConcealInPos else (keyOrConcealInPos as Conceal).hiddenElement!!
+        keys.add(key)
         elements.removeIf { e -> e is Player || ( e.position == player.position && e is Key) }
         elements.add(Player(player.position!!, keys, player.lookingTo))
     }

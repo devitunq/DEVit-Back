@@ -12,8 +12,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo
         JsonSubTypes.Type(value = CollectKey::class, name = "CollectKey"),
         JsonSubTypes.Type(value = OpenDoor::class, name = "OpenDoor"),
         JsonSubTypes.Type(value = DoorCondition::class, name = "DoorCondition"),
-        JsonSubTypes.Type(value = KeyCondition::class, name = "KeyCondition"),
-        JsonSubTypes.Type(value = KeyCondition::class, name = "KeyCondition"),
         JsonSubTypes.Type(value = KeyCondition::class, name = "KeyCondition")
 )
 interface Action {

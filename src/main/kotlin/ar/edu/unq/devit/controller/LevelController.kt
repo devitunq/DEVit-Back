@@ -65,7 +65,7 @@ class LevelController {
             var levelChecker = LevelChecker(level, solution.toMutableList())
             res = levelChecker.winOrLost()
         } catch (e: Exception) {
-            return ResponseEntity(res, HttpStatus.OK)
+            return ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         }
         return ResponseEntity(res, HttpStatus.OK)
     }
