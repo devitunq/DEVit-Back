@@ -38,7 +38,7 @@ class LevelChecker(var levelToCheck: Level, var functionList: List<Function>) {
     }
 
     private fun setSuccessLevelComment(){
-        if(totalInstructions == levelToCheck.bestNumberMovesToWin){
+        if(totalInstructions <= levelToCheck.bestNumberMovesToWin){
             this.comment = LevelComments.LEVEL_COMPLETE_BEST_WAY
         }
         else{
@@ -48,7 +48,8 @@ class LevelChecker(var levelToCheck: Level, var functionList: List<Function>) {
 
     fun doActions(actionList: List<Action>){
         for (action in actionList)
-            tryActionOrException(action)
+            if(actualPositionPlayer == levelToCheck.finishPosition()) break
+            else tryActionOrException(action)
     }
 
 

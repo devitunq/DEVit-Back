@@ -19,7 +19,7 @@ class Level {
     @BsonProperty
     var description: String? = null
     @BsonProperty
-    var bestNumberMovesToWin: Int? = null
+    var bestNumberMovesToWin: Int = 0
     @BsonProperty
     var playerPosition: Position? = null
     @BsonProperty
@@ -28,6 +28,18 @@ class Level {
     var dislikes: Int = 0
     @BsonProperty
     var scoreFromAndLevel: MutableSet<String> = mutableSetOf()
+
+    @BsonProperty
+    var ifEnabled: Boolean = false
+    @BsonProperty
+    var repeatEnabled: Boolean = false
+    @BsonProperty
+    var callProceduresEnabled: Boolean = false
+
+    @BsonProperty
+    var maxMovsBoard1: Int = 99999
+    @BsonProperty
+    var maxMovsBoard2: Int = 99999
 
     constructor()
 

@@ -26,6 +26,7 @@ class GoUp : Action {
     override fun invoke(checker: LevelChecker) {
         repeat(times) {
             val newPos = checker.actualPositionPlayer!!.up()
+            if(checker.actualPositionPlayer == checker.levelToCheck.finishPosition()) return
             checker.levelToCheck.tryAndMovePlayer(newPos, checker.lastKnownPlayerPosition!!, null)
             checker.lastKnownPlayerPosition = checker.actualPositionPlayer
             checker.actualPositionPlayer = newPos
@@ -38,6 +39,7 @@ class GoDown : Action {
     override fun invoke(checker: LevelChecker) {
         repeat(times) {
             val newPos = checker.actualPositionPlayer!!.down()
+            if(checker.actualPositionPlayer == checker.levelToCheck.finishPosition()) return
             checker.levelToCheck.tryAndMovePlayer(newPos, checker.lastKnownPlayerPosition!!, null)
             checker.lastKnownPlayerPosition = checker.actualPositionPlayer
             checker.actualPositionPlayer = newPos
@@ -50,6 +52,7 @@ class GoLeft : Action {
     override fun invoke(checker: LevelChecker) {
         repeat(times) {
             val newPos = checker.actualPositionPlayer!!.left()
+            if(checker.actualPositionPlayer == checker.levelToCheck.finishPosition()) return
             checker.levelToCheck.tryAndMovePlayer(newPos, checker.lastKnownPlayerPosition!!, LookingTo.LEFT)
             checker.lastKnownPlayerPosition = checker.actualPositionPlayer
             checker.actualPositionPlayer = newPos
@@ -62,6 +65,7 @@ class GoRight : Action {
     override fun invoke(checker: LevelChecker) {
         repeat(times) {
             val newPos = checker.actualPositionPlayer!!.right()
+            if(checker.actualPositionPlayer == checker.levelToCheck.finishPosition()) return
             checker.levelToCheck.tryAndMovePlayer(newPos, checker.lastKnownPlayerPosition!!, LookingTo.RIGHT)
             checker.lastKnownPlayerPosition = checker.actualPositionPlayer
             checker.actualPositionPlayer = newPos
