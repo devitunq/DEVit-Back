@@ -1,4 +1,4 @@
-package ar.edu.unq.devit.model.request
+package ar.edu.unq.devit.model.response
 
 import ar.edu.unq.devit.model.levelElements.LevelElement
 import ar.edu.unq.devit.model.LevelState

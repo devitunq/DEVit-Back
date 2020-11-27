@@ -3,9 +3,9 @@ package ar.edu.unq.devit.controller
 import ar.edu.unq.devit.model.*
 import ar.edu.unq.devit.model.Function
 import ar.edu.unq.devit.model.Level
-import ar.edu.unq.devit.model.request.LevelSolutionHeader
-import ar.edu.unq.devit.model.request.ScoreHeader
-import ar.edu.unq.devit.model.request.SolutionResponse
+import ar.edu.unq.devit.model.request.LevelSolutionRequest
+import ar.edu.unq.devit.model.request.ScoreRequest
+import ar.edu.unq.devit.model.response.SolutionResponse
 import ar.edu.unq.devit.service.LevelService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -72,7 +72,7 @@ class LevelController {
 
     @PostMapping("/score/{levelId}")
     @Throws(Exception::class)
-    fun scoreLevel(@PathVariable levelId: String, @RequestBody score: ScoreHeader): ResponseEntity<String> {
+    fun scoreLevel(@PathVariable levelId: String, @RequestBody score: ScoreRequest): ResponseEntity<String> {
         try {
              service.scoreLevel(levelId, score.score!!, score.from!!)
         } catch (e: Exception) {
@@ -108,10 +108,10 @@ class LevelController {
 
     @PostMapping("/solveNewLevel")
     @Throws(Exception::class)
-    fun saveLevel(@RequestBody levelAndSol: LevelSolutionHeader): ResponseEntity<SolutionResponse>{
+    fun saveLevel(@RequestBody levelAndSol: LevelSolutionRequest): ResponseEntity<SolutionResponse>{
         var res: SolutionResponse? = null
         try{
-           if (levelAndSol.actionList!![0].actionList.size > levelAndSol.level!!.bestNumberMovesToWin!!)
+           if (levelAndSol.actionList!!.fold(0, { acc, f -> acc +f.actionList.size }) > levelAndSol.level!!.bestNumberMovesToWin!!)
                throw Exception("Cantidad de movimientos no valida")
             res = LevelChecker(levelAndSol.level, levelAndSol.actionList.toMutableList()).winOrLost()
         } catch (e: Exception){

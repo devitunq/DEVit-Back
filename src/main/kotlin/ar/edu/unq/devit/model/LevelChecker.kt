@@ -1,6 +1,6 @@
 package ar.edu.unq.devit.model
 
-import ar.edu.unq.devit.model.request.SolutionResponse
+import ar.edu.unq.devit.model.response.SolutionResponse
 import ar.edu.unq.devit.model.error.*
 import ar.edu.unq.devit.model.levelElements.LevelElement
 
