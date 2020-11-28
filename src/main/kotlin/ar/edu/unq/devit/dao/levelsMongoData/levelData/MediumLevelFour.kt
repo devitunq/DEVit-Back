@@ -1,21 +1,27 @@
 package ar.edu.unq.devit.dao.levelsMongoData.levelData
-import ar.edu.unq.devit.model.*
+
 import ar.edu.unq.devit.model.Level
+import ar.edu.unq.devit.model.Position
 import ar.edu.unq.devit.model.levelElements.*
 
-class MediumLevelSix {
+class MediumLevelFour {
 
     val levelData = GenericLevelData
 
-    var levelname = "Level Six"
+    var levelname = "Level Four"
 
-    var levelDesc = "¿Eres capaz de llegar a la meta con tan solo 3 instrucciones y un tablero?"
+    var levelDesc = "Es hora de combinar todo lo aprendido hasta el momento, esta vez tendrás un límite de 6 movimientos para el tablero 1, y 6 para el tablero 2. Pista: Delegar responsabilidades."
 
     // Finish element
     var finish = Finish(Position(6, 0))
 
     // Player element
     var player = Player(Position(0, 6))
+
+    //Key and Door
+    var key = Key(Position(1, 4 ))
+    var door = Door(Position(3, 3))
+
 
     // Paths element
     var tile06 = PathTile(Position(0, 6))
@@ -35,25 +41,27 @@ class MediumLevelSix {
 
     fun levelElements(): MutableList<LevelElement> {
         return listOf(
-                finish, player, tile06, tile05, tile15, tile14, tile24, tile23, tile33, tile32, tile42, tile41, tile51, tile50, tile60
+                finish, player, key, door, tile06, tile05, tile15, tile14, tile24, tile23, tile33, tile32, tile42, tile41, tile51, tile50, tile60
         ).toMutableList()
     }
     // Level
-    private var levelOne =
+    private var level =
             Level(
                     levelData.medium,
                     levelname,
                     levelElements(),
                     levelDesc,
-                    3,
-                    maxMovsBoard1 = 3,
-                    maxMovsBoard2 = 0,
-                    callProceduresEnabled = true)
+                    9,
+                    maxMovsBoard1 = 6,
+                    maxMovsBoard2 = 6,
+                    callProceduresEnabled = true,
+                    ifEnabled = true,
+                    repeatEnabled = true)
 
-    fun createMediumLevelSix(){
-        levelOne.callProceduresEnabled = false
+    fun createMediumLevelFour(){
         levelData.levelDAO.startTransaction()
-        levelData.levelDAO.safeSave(levelOne)
+        levelData.levelDAO.safeSave(level)
         levelData.levelDAO.commit()
     }
 }
+

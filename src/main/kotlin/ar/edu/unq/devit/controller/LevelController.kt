@@ -59,7 +59,7 @@ class LevelController {
     @PostMapping("/solve/{levelId}")
     @Throws(Exception::class)
     fun solve(@PathVariable levelId: String, @RequestBody solution: List<Function>): ResponseEntity<SolutionResponse> {
-        var res: SolutionResponse? = null
+        var res: SolutionResponse
         try {
             var level = service.findByLevelId(levelId)
             var levelChecker = LevelChecker(level, solution.toMutableList())
@@ -111,7 +111,7 @@ class LevelController {
     fun saveLevel(@RequestBody levelAndSol: LevelSolutionRequest): ResponseEntity<SolutionResponse>{
         var res: SolutionResponse? = null
         try{
-           if (levelAndSol.actionList!!.fold(0, { acc, f -> acc +f.actionList.size }) > levelAndSol.level!!.bestNumberMovesToWin!!)
+           if (levelAndSol.actionList!!.fold(0, { acc, f -> acc +f.actionList.size }) > levelAndSol.level!!.bestNumberMovesToWin)
                throw Exception("Cantidad de movimientos no valida")
             res = LevelChecker(levelAndSol.level, levelAndSol.actionList.toMutableList()).winOrLost()
         } catch (e: Exception){

@@ -62,7 +62,7 @@ class LevelChecker(var levelToCheck: Level, var functionList: List<Function>) {
                 levelToCheck.removeFinish()
                 fullGame.removeAt(fullGame.size-1)
                 this.setSuccessLevelComment()
-                starsWons = StarsSystem.calculateStars(levelToCheck.bestNumberMovesToWin!!, totalInstructions)
+                starsWons = StarsSystem.calculateStars(levelToCheck.bestNumberMovesToWin, totalInstructions)
             }
         } catch (e: OutOfPathException){
             this.comment = LevelComments.FAILED_LEVEL_BY_WATER

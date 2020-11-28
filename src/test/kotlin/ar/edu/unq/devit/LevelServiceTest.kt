@@ -19,6 +19,8 @@ class LevelServiceTest {
     var lvl4EGenerator = EasyLevelFour()
     var lvl1MGenerator = MediumLevelOne()
     var lvl2MGenerator = MediumLevelTwo()
+    var lvl3Mgenerator = MediumLevelThree()
+    var lvl4Mgenerator = MediumLevelFour()
     var levelService = LevelService()
 
     @BeforeAll
@@ -34,6 +36,8 @@ class LevelServiceTest {
         lvl4EGenerator.createEasyLevelFour()
         lvl1MGenerator.createMediumLevelOne()
         lvl2MGenerator.createMediumLevelTwo()
+        lvl3Mgenerator.createMediumLevelThree()
+        lvl4Mgenerator.createMediumLevelFour()
     }
 
 //    @AfterEach
