@@ -9,8 +9,9 @@ import org.bson.codecs.pojo.annotations.BsonDiscriminator
 @JsonSubTypes(
     JsonSubTypes.Type(value = Player::class, name = "Player"),
     JsonSubTypes.Type(value = Finish::class, name = "Finish"),
-    JsonSubTypes.Type(value = Finish::class, name = "Key"),
+    JsonSubTypes.Type(value = Key::class, name = "Key"),
     JsonSubTypes.Type(value = PathTile::class, name = "PathTile"),
+    JsonSubTypes.Type(value = Conceal::class, name = "Conceal"),
     JsonSubTypes.Type(value = Obstruction::class, name = "Obstruction")
     )
 @BsonDiscriminator(key = "type")

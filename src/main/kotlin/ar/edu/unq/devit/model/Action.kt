@@ -13,8 +13,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo
         JsonSubTypes.Type(value = OpenDoor::class, name = "OpenDoor"),
         JsonSubTypes.Type(value = DoorCondition::class, name = "DoorCondition"),
         JsonSubTypes.Type(value = KeyCondition::class, name = "KeyCondition"),
-        JsonSubTypes.Type(value = KeyCondition::class, name = "KeyCondition"),
-        JsonSubTypes.Type(value = KeyCondition::class, name = "KeyCondition")
+        JsonSubTypes.Type(value = Board1Call::class, name = "Board1Call"),
+        JsonSubTypes.Type(value = Board2Call::class, name = "Board2Call")
 )
 interface Action {
     var times : Int
@@ -26,6 +26,7 @@ class GoUp : Action {
     override fun invoke(checker: LevelChecker) {
         repeat(times) {
             val newPos = checker.actualPositionPlayer!!.up()
+            if(checker.actualPositionPlayer == checker.levelToCheck.finishPosition()) return
             checker.levelToCheck.tryAndMovePlayer(newPos, checker.lastKnownPlayerPosition!!, null)
             checker.lastKnownPlayerPosition = checker.actualPositionPlayer
             checker.actualPositionPlayer = newPos
@@ -38,6 +39,7 @@ class GoDown : Action {
     override fun invoke(checker: LevelChecker) {
         repeat(times) {
             val newPos = checker.actualPositionPlayer!!.down()
+            if(checker.actualPositionPlayer == checker.levelToCheck.finishPosition()) return
             checker.levelToCheck.tryAndMovePlayer(newPos, checker.lastKnownPlayerPosition!!, null)
             checker.lastKnownPlayerPosition = checker.actualPositionPlayer
             checker.actualPositionPlayer = newPos
@@ -50,6 +52,7 @@ class GoLeft : Action {
     override fun invoke(checker: LevelChecker) {
         repeat(times) {
             val newPos = checker.actualPositionPlayer!!.left()
+            if(checker.actualPositionPlayer == checker.levelToCheck.finishPosition()) return
             checker.levelToCheck.tryAndMovePlayer(newPos, checker.lastKnownPlayerPosition!!, LookingTo.LEFT)
             checker.lastKnownPlayerPosition = checker.actualPositionPlayer
             checker.actualPositionPlayer = newPos
@@ -62,6 +65,7 @@ class GoRight : Action {
     override fun invoke(checker: LevelChecker) {
         repeat(times) {
             val newPos = checker.actualPositionPlayer!!.right()
+            if(checker.actualPositionPlayer == checker.levelToCheck.finishPosition()) return
             checker.levelToCheck.tryAndMovePlayer(newPos, checker.lastKnownPlayerPosition!!, LookingTo.RIGHT)
             checker.lastKnownPlayerPosition = checker.actualPositionPlayer
             checker.actualPositionPlayer = newPos
@@ -97,14 +101,14 @@ class KeyCondition : Action {
         checker.addIfValidPosition()
     }
 }
-class F1CALL : Action {
+class Board1Call : Action {
     override var times: Int = 1
     override fun invoke(checker: LevelChecker) {
         checker.doActions(checker.functionList[0].actionList)
     }
 }
 
-class F2CALL : Action {
+class Board2Call : Action {
     override var times: Int = 1
     override fun invoke(checker: LevelChecker) {
         checker.doActions(if (checker.functionList.size == 2) checker.functionList[1].actionList else listOf())

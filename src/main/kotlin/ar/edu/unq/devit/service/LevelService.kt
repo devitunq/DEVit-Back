@@ -27,6 +27,8 @@ class LevelService {
         }
     }
 
+    fun isExistenteLevel (levelId: String): Boolean =  levelDAO.isExistentLevel(levelId)
+
     fun saveLevel(level: Level) = levelDAO.safeSave(level)
 
 

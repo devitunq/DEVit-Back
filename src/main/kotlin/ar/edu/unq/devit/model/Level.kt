@@ -19,7 +19,7 @@ class Level {
     @BsonProperty
     var description: String? = null
     @BsonProperty
-    var bestNumberMovesToWin: Int? = null
+    var bestNumberMovesToWin: Int = 0
     @BsonProperty
     var playerPosition: Position? = null
     @BsonProperty
@@ -29,10 +29,24 @@ class Level {
     @BsonProperty
     var scoreFromAndLevel: MutableSet<String> = mutableSetOf()
 
+    @BsonProperty
+    var ifEnabled: Boolean = false
+    @BsonProperty
+    var repeatEnabled: Boolean = false
+    @BsonProperty
+    var callProceduresEnabled: Boolean = false
+
+    @BsonProperty
+    var maxMovsBoard1: Int = 99999
+    @BsonProperty
+    var maxMovsBoard2: Int = 99999
+
     constructor()
 
     constructor(difficulty: Difficulty,name: String, elements: MutableList<LevelElement>,
-                description: String, bestNumberMovesToWin: Int){
+                description: String, bestNumberMovesToWin: Int, ifEnabled : Boolean = false,
+                repeatEnabled: Boolean = false, callProceduresEnabled : Boolean = false,
+                maxMovsBoard1 : Int = 99999, maxMovsBoard2 : Int = 99999){
         this.levelId = "${difficulty}_${name}"
         this.difficulty = difficulty
         this.name = name
@@ -40,6 +54,11 @@ class Level {
         this.description = description
         this.bestNumberMovesToWin = bestNumberMovesToWin
         this.playerPosition = elements.find { e -> e is Player }?.position!!
+        this.ifEnabled = ifEnabled
+        this.repeatEnabled = repeatEnabled
+        this.callProceduresEnabled = callProceduresEnabled
+        this.maxMovsBoard1 = maxMovsBoard1
+        this.maxMovsBoard2 = maxMovsBoard2
     }
 
 
@@ -67,7 +86,7 @@ class Level {
 
     fun keyAtPlayer() : Boolean {
         val player = elements.find { e -> e is Player } as Player
-        return elements.find { e -> e.position == player.position && e is Key } as? Key != null
+        return elements.find { e -> e.position == player.position && e is Key || (e is Conceal && e.hiddenElement is Key) }  != null
     }
 
     fun openDoor() {
@@ -88,10 +107,11 @@ class Level {
     fun collectKey() {
         val player = (elements.find { e -> e is Player } as Player)
         val keys = player.keys
-        val keyInPos = elements.find { e -> e.position == player.position && e is Key } as? Key
-                ?: throw KeyNotFoundException(ModelMessages.KEY_NOT_FOUND)
-        keys.add(keyInPos)
-        elements.removeIf { e -> e is Player || ( e.position == player.position && e is Key) }
+        val keyOrConcealInPos : LevelElement? = elements.find { e -> e.position == player.position && e is Key || (e is Conceal && e.hiddenElement is Key) }
+        if (keyOrConcealInPos !is Key && keyOrConcealInPos !is Conceal) throw KeyNotFoundException(ModelMessages.KEY_NOT_FOUND)
+        val key : Key = if (keyOrConcealInPos is Key) keyOrConcealInPos else (keyOrConcealInPos as Conceal).hiddenElement!!
+        keys.add(key)
+        elements.removeIf { e -> e is Player || ( e.position == player.position && (e is Key || e is Conceal)) }
         elements.add(Player(player.position!!, keys, player.lookingTo))
     }
 

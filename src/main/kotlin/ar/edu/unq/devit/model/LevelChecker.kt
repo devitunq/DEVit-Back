@@ -1,6 +1,6 @@
 package ar.edu.unq.devit.model
 
-import ar.edu.unq.devit.model.request.SolutionResponse
+import ar.edu.unq.devit.model.response.SolutionResponse
 import ar.edu.unq.devit.model.error.*
 import ar.edu.unq.devit.model.levelElements.LevelElement
 
@@ -38,7 +38,7 @@ class LevelChecker(var levelToCheck: Level, var functionList: List<Function>) {
     }
 
     private fun setSuccessLevelComment(){
-        if(totalInstructions == levelToCheck.bestNumberMovesToWin){
+        if(totalInstructions <= levelToCheck.bestNumberMovesToWin){
             this.comment = LevelComments.LEVEL_COMPLETE_BEST_WAY
         }
         else{
@@ -48,7 +48,8 @@ class LevelChecker(var levelToCheck: Level, var functionList: List<Function>) {
 
     fun doActions(actionList: List<Action>){
         for (action in actionList)
-            tryActionOrException(action)
+            if(actualPositionPlayer == levelToCheck.finishPosition()) break
+            else tryActionOrException(action)
     }
 
 
@@ -61,7 +62,7 @@ class LevelChecker(var levelToCheck: Level, var functionList: List<Function>) {
                 levelToCheck.removeFinish()
                 fullGame.removeAt(fullGame.size-1)
                 this.setSuccessLevelComment()
-                starsWons = StarsSystem.calculateStars(levelToCheck.bestNumberMovesToWin!!, totalInstructions)
+                starsWons = StarsSystem.calculateStars(levelToCheck.bestNumberMovesToWin, totalInstructions)
             }
         } catch (e: OutOfPathException){
             this.comment = LevelComments.FAILED_LEVEL_BY_WATER

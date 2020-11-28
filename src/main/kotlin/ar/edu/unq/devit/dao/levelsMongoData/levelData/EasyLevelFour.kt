@@ -32,6 +32,8 @@ class EasyLevelFour {
     var doorFive = Door(Position(5, 3))
     var doorSix = Door(Position(5, 2))
 
+    var concealOne = Conceal(Position(6,4))
+
     var tile01 = PathTile(Position(0, 1))
     var tile02 = PathTile(Position(0, 2))
     var tile12 = PathTile(Position(1, 2))
@@ -61,7 +63,7 @@ class EasyLevelFour {
             listOf(
                     finish,player,keyOne,keyTwo,keyThree,keyFour,doorOne,doorFour,doorFive,doorSix,
                     tile01, tile02,tile12,tile13,tile14,tile15,tile16,tile26,tile32,tile33,tile36,tile40,tile43,
-                    tile46,tile50,tile51,tile52,tile53,tile54,tile55,tile56,tile64
+                    tile46,tile50,tile51,tile52,tile53,tile54,tile55,tile56,tile64,concealOne
             ).toMutableList()
 
     // Level
@@ -71,7 +73,9 @@ class EasyLevelFour {
                     level4name,
                     level4Elements,
                     level4Desc,
-                    30)
+                    30,
+                    ifEnabled = true,
+                    repeatEnabled = true)
 
     fun createEasyLevelFour(){
         levelData.levelDAO.startTransaction()

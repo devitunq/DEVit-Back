@@ -3,8 +3,9 @@ package ar.edu.unq.devit.controller
 import ar.edu.unq.devit.model.*
 import ar.edu.unq.devit.model.Function
 import ar.edu.unq.devit.model.Level
-import ar.edu.unq.devit.model.request.ScoreHeader
-import ar.edu.unq.devit.model.request.SolutionResponse
+import ar.edu.unq.devit.model.request.LevelSolutionRequest
+import ar.edu.unq.devit.model.request.ScoreRequest
+import ar.edu.unq.devit.model.response.SolutionResponse
 import ar.edu.unq.devit.service.LevelService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -58,20 +59,20 @@ class LevelController {
     @PostMapping("/solve/{levelId}")
     @Throws(Exception::class)
     fun solve(@PathVariable levelId: String, @RequestBody solution: List<Function>): ResponseEntity<SolutionResponse> {
-        var res: SolutionResponse? = null
+        var res: SolutionResponse
         try {
             var level = service.findByLevelId(levelId)
             var levelChecker = LevelChecker(level, solution.toMutableList())
             res = levelChecker.winOrLost()
         } catch (e: Exception) {
-            return ResponseEntity(res, HttpStatus.OK)
+            return ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         }
         return ResponseEntity(res, HttpStatus.OK)
     }
 
     @PostMapping("/score/{levelId}")
     @Throws(Exception::class)
-    fun scoreLevel(@PathVariable levelId: String, @RequestBody score: ScoreHeader): ResponseEntity<String> {
+    fun scoreLevel(@PathVariable levelId: String, @RequestBody score: ScoreRequest): ResponseEntity<String> {
         try {
              service.scoreLevel(levelId, score.score!!, score.from!!)
         } catch (e: Exception) {
@@ -84,11 +85,39 @@ class LevelController {
     @Throws(Exception::class)
     fun saveLevel(@RequestBody level: Level): ResponseEntity<String>{
         try{
+            if (service.isExistenteLevel(level.levelId!!))
+                throw Exception("Nombre ya existente")
             service.saveLevel(level)
         } catch (e: Exception){
             return ResponseEntity(e.message, HttpStatus.INTERNAL_SERVER_ERROR)
         }
         return ResponseEntity(HttpStatus.OK)
+    }
+
+    @GetMapping("/checkName")
+    @Throws(Exception::class)
+    fun checkLevelName(@RequestParam levelId: String): ResponseEntity<Boolean> {
+        var isExistentLvl: Boolean
+        try {
+            isExistentLvl = service.isExistenteLevel(levelId)
+        } catch (e: Exception) {
+            return ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+        return ResponseEntity(isExistentLvl, HttpStatus.OK)
+    }
+
+    @PostMapping("/solveNewLevel")
+    @Throws(Exception::class)
+    fun saveLevel(@RequestBody levelAndSol: LevelSolutionRequest): ResponseEntity<SolutionResponse>{
+        var res: SolutionResponse? = null
+        try{
+           if (levelAndSol.actionList!!.fold(0, { acc, f -> acc +f.actionList.size }) > levelAndSol.level!!.bestNumberMovesToWin)
+               throw Exception("Cantidad de movimientos no valida")
+            res = LevelChecker(levelAndSol.level, levelAndSol.actionList.toMutableList()).winOrLost()
+        } catch (e: Exception){
+            return ResponseEntity(res, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+        return ResponseEntity(res, HttpStatus.OK)
     }
 
 }
