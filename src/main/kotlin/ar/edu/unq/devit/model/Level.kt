@@ -44,7 +44,9 @@ class Level {
     constructor()
 
     constructor(difficulty: Difficulty,name: String, elements: MutableList<LevelElement>,
-                description: String, bestNumberMovesToWin: Int){
+                description: String, bestNumberMovesToWin: Int, ifEnabled : Boolean = false,
+                repeatEnabled: Boolean = false, callProceduresEnabled : Boolean = false,
+                maxMovsBoard1 : Int = 99999, maxMovsBoard2 : Int = 99999){
         this.levelId = "${difficulty}_${name}"
         this.difficulty = difficulty
         this.name = name
@@ -52,6 +54,11 @@ class Level {
         this.description = description
         this.bestNumberMovesToWin = bestNumberMovesToWin
         this.playerPosition = elements.find { e -> e is Player }?.position!!
+        this.ifEnabled = ifEnabled
+        this.repeatEnabled = repeatEnabled
+        this.callProceduresEnabled = callProceduresEnabled
+        this.maxMovsBoard1 = maxMovsBoard1
+        this.maxMovsBoard2 = maxMovsBoard2
     }
 
 
@@ -104,7 +111,7 @@ class Level {
         if (keyOrConcealInPos !is Key && keyOrConcealInPos !is Conceal) throw KeyNotFoundException(ModelMessages.KEY_NOT_FOUND)
         val key : Key = if (keyOrConcealInPos is Key) keyOrConcealInPos else (keyOrConcealInPos as Conceal).hiddenElement!!
         keys.add(key)
-        elements.removeIf { e -> e is Player || ( e.position == player.position && e is Key) }
+        elements.removeIf { e -> e is Player || ( e.position == player.position && (e is Key || e is Conceal)) }
         elements.add(Player(player.position!!, keys, player.lookingTo))
     }
 
