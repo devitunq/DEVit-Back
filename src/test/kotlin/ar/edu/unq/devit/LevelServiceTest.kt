@@ -1,10 +1,7 @@
 package ar.edu.unq.devit
 
 import ar.edu.unq.devit.dao.LevelMongoDAO
-import ar.edu.unq.devit.dao.levelsMongoData.levelData.EasyLevelFour
-import ar.edu.unq.devit.dao.levelsMongoData.levelData.EasyLevelOne
-import ar.edu.unq.devit.dao.levelsMongoData.levelData.EasyLevelThree
-import ar.edu.unq.devit.dao.levelsMongoData.levelData.EasyLevelTwo
+import ar.edu.unq.devit.dao.levelsMongoData.levelData.*
 import ar.edu.unq.devit.model.Difficulty
 import ar.edu.unq.devit.service.LevelService
 import org.junit.Assert
@@ -20,6 +17,8 @@ class LevelServiceTest {
     var lvl2EGenerator = EasyLevelTwo()
     var lvl3EGenerator = EasyLevelThree()
     var lvl4EGenerator = EasyLevelFour()
+    var lvl1MGenerator = MediumLevelOne()
+    var lvl2MGenerator = MediumLevelTwo()
     var levelService = LevelService()
 
     @BeforeAll
@@ -33,6 +32,8 @@ class LevelServiceTest {
         lvl2EGenerator.createEasyLevelTwo()
         lvl3EGenerator.createEasyLevelThree()
         lvl4EGenerator.createEasyLevelFour()
+        lvl1MGenerator.createMediumLevelOne()
+        lvl2MGenerator.createMediumLevelTwo()
     }
 
 //    @AfterEach

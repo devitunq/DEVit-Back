@@ -76,6 +76,8 @@ class EasyLevelFour {
                     30)
 
     fun createEasyLevelFour(){
+        levelFour.ifEnabled = true
+        levelFour.repeatEnabled = true
         levelData.levelDAO.startTransaction()
         levelData.levelDAO.safeSave(levelFour)
         levelData.levelDAO.commit()
