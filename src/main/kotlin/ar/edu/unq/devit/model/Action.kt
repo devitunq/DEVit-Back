@@ -91,14 +91,12 @@ class DoorCondition : Action {
     override var times: Int = 1
     override fun invoke(checker: LevelChecker) {
         checker.canTryNextAction = checker.levelToCheck.doorAtPlayer()
-        checker.addIfValidPosition()
     }
 }
 class KeyCondition : Action {
     override var times: Int = 1
     override fun invoke(checker: LevelChecker) {
         checker.canTryNextAction = checker.levelToCheck.keyAtPlayer()
-        checker.addIfValidPosition()
     }
 }
 class Board1Call : Action {
