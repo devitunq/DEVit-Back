@@ -71,7 +71,8 @@ class MediumLevelOne {
                     19)
 
     fun createMediumLevelOne(){
-        levelOne.callProceduresEnabled = false
+        levelOne.ifEnabled = true
+        levelOne.repeatEnabled = true
         levelData.levelDAO.startTransaction()
         levelData.levelDAO.safeSave(levelOne)
         levelData.levelDAO.commit()
