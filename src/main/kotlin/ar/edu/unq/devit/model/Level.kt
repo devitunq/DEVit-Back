@@ -28,6 +28,8 @@ class Level {
     var dislikes: Int = 0
     @BsonProperty
     var scoreFromAndLevel: MutableSet<String> = mutableSetOf()
+    @BsonProperty
+    var private: Boolean = false
 
     @BsonProperty
     var ifEnabled: Boolean = false
@@ -46,7 +48,7 @@ class Level {
     constructor(difficulty: Difficulty,name: String, elements: MutableList<LevelElement>,
                 description: String, bestNumberMovesToWin: Int, ifEnabled : Boolean = false,
                 repeatEnabled: Boolean = false, callProceduresEnabled : Boolean = false,
-                maxMovsBoard1 : Int = 99999, maxMovsBoard2 : Int = 99999){
+                maxMovsBoard1 : Int = 99999, maxMovsBoard2 : Int = 99999, private: Boolean = false){
         this.levelId = "${difficulty}_${name}"
         this.difficulty = difficulty
         this.name = name
@@ -54,6 +56,7 @@ class Level {
         this.description = description
         this.bestNumberMovesToWin = bestNumberMovesToWin
         this.playerPosition = elements.find { e -> e is Player }?.position!!
+        this.private = private
         this.ifEnabled = ifEnabled
         this.repeatEnabled = repeatEnabled
         this.callProceduresEnabled = callProceduresEnabled

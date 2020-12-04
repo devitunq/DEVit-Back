@@ -53,7 +53,7 @@ class UserService {
 
     fun getUserCompletionProgress(userName: String): Long {
         val user = userDAO.getBy("userName", userName)
-        val totalLevelCount = levelMongoDAO.numberOfLevelsInCollection()
-        return (user!!.levelsPassed!!.size * 100) / totalLevelCount
+        val totalLevelCount = levelMongoDAO.numberOfLevelsPublicsInCollection()
+        return ((user!!.levelsPassed!!.size * 100) / totalLevelCount).toLong()
     }
 }

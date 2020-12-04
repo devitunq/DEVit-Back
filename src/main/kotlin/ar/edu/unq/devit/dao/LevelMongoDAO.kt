@@ -1,6 +1,7 @@
 package ar.edu.unq.devit.dao
 
 import ar.edu.unq.devit.model.Level
+import com.mongodb.client.model.Filters.*
 import org.springframework.stereotype.Repository
 
 @Repository
@@ -18,4 +19,14 @@ class LevelMongoDAO: GenericMongoDAO<Level>(Level::class.java){
 
     fun numberOfLevelsInCollection() = numberOfDocuments()
 
+    fun numberOfLevelsPublicsInCollection(): Int =
+            find(
+                    and(
+                            eq("private", false),
+                            or(
+                                    eq("difficulty", "Easy"),
+                                    eq("difficulty", "Medium")
+                            )
+                    )
+            ).size
 }
